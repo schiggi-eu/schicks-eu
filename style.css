@@ -261,3 +261,8 @@ footer a:hover{color:var(--navy)}
 .ev h3{font-family:var(--serif);font-size:20px;color:var(--navy);margin:4px 0 6px}
 .ev p{color:var(--muted);font-size:15px}
 @media (max-width:900px){.speaker{grid-template-columns:1fr;gap:36px}}
+
+/* Logo [MS] */
+.brand img.mark{width:44px;height:44px;flex:none;display:block}
+footer .fb img.mark{width:26px;height:26px;display:block}
+@media (max-width:420px){.brand img.mark{width:38px;height:38px}}
