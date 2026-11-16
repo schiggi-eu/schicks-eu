@@ -266,3 +266,44 @@ footer a:hover{color:var(--navy)}
 .brand img.mark{width:44px;height:44px;flex:none;display:block}
 footer .fb img.mark{width:26px;height:26px;display:block}
 @media (max-width:420px){.brand img.mark{width:38px;height:38px}}
+
+/* ===== Navy accents (balance navy / white) ===== */
+.hero{background:radial-gradient(1100px 560px at 85% -10%,#1d3a66 0%,transparent 60%),linear-gradient(160deg,#0b1f3a 0%,#13294b 100%);color:#fff;border-bottom:0}
+.hero h1.name{color:#fff}
+.hero h1.name span{color:#8fb3f5}
+.hero .claim{color:#fff}
+.hero p.lead{color:rgba(255,255,255,.8)}
+.hero svg.curves{opacity:.35}
+.hero svg.curves path{stroke:#6c9cf0}
+.hero .btn.primary{background:#fff;color:var(--navy)}
+.hero .btn.primary:hover{background:#eef2f8}
+.hero .btn.ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.hero .btn.ghost:hover{background:rgba(255,255,255,.08)}
+.hero .facts{border-top-color:rgba(255,255,255,.14)}
+.hero .facts b{color:#fff}
+.hero .facts span{color:rgba(255,255,255,.7)}
+.portrait img{box-shadow:0 30px 60px -25px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12)}
+#arbeitsweise{background:linear-gradient(160deg,#0b1f3a 0%,#13294b 100%)}
+#arbeitsweise .eyebrow{color:#8fb3f5}
+#arbeitsweise h2{color:#fff}
+#arbeitsweise .ap{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+#arbeitsweise .ap h3{color:#fff}
+#arbeitsweise .ap p{color:rgba(255,255,255,.72)}
+#arbeitsweise .formats span{color:#8fb3f5}
+#arbeitsweise .formats li{background:transparent;border-color:rgba(255,255,255,.28);color:#fff}
+.creds{background:var(--navy);color:#fff;border:0;border-top:3px solid var(--gold)}
+.creds li{border-bottom:1px solid rgba(255,255,255,.12)}
+.creds li b{color:#fff}
+.creds li span{color:rgba(255,255,255,.68)}
+.creds a{color:#fff;border-bottom-color:rgba(255,255,255,.35)}
+.contact{background:linear-gradient(160deg,#0b1f3a 0%,#13294b 100%);color:#fff;border-top:0}
+.contact h2{color:#fff}
+.contact p{color:rgba(255,255,255,.78)}
+.contact .btn.primary{background:#fff;color:var(--navy)}
+.contact .btn.ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.contact .mail a{color:rgba(255,255,255,.8)}
+footer{background:#081629;color:rgba(255,255,255,.6);border-top:0}
+footer a{color:rgba(255,255,255,.75)}
+footer a:hover{color:#fff}
+footer .fb img.mark{box-shadow:0 0 0 1px rgba(255,255,255,.25);border-radius:5px}
+.legal .lede{color:var(--muted);font-size:15px;margin-top:-14px;margin-bottom:24px}
