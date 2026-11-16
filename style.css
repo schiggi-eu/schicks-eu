@@ -1,4 +1,6 @@
 :root{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua","Noto Serif",Georgia,serif;
+  --gold:#c9a961;
   --navy:#0b1f3a;--navy-2:#13294b;--navy-3:#1d3a66;--accent:#6c9cf0;
   --ink:#14213d;--muted:#5a6780;--line:#e3e8f0;--bg-soft:#f4f6fa;--white:#fff;
   --radius:14px;--max:1120px;
@@ -14,8 +16,9 @@ a{color:inherit}
 header.top{position:sticky;top:0;z-index:20;background:rgba(11,31,58,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:600;letter-spacing:.2px}
-.brand svg{width:34px;height:34px;flex:none}
-.brand small{display:block;font-weight:400;font-size:12px;opacity:.7;letter-spacing:1.5px;text-transform:uppercase}
+.brand svg{width:40px;height:40px;flex:none}
+.brand .bn{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
+.brand small{display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif;font-weight:500;font-size:10.5px;opacity:.72;letter-spacing:2.4px;text-transform:uppercase;margin-top:1px}
 nav.main{display:flex;gap:28px;align-items:center}
 nav.main a{color:rgba(255,255,255,.82);text-decoration:none;font-size:15px}
 nav.main a:hover{color:#fff}
@@ -33,7 +36,8 @@ nav.main a:hover{color:#fff}
 .eyebrow{display:inline-block;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:22px}
 .hero h1.name{font-size:clamp(20px,2vw,24px);font-weight:700;letter-spacing:.2px;margin-bottom:20px;line-height:1.3}
 .hero h1.name span{display:block;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-top:6px}
-.hero .claim{font-size:clamp(32px,4.6vw,56px);line-height:1.1;font-weight:700;letter-spacing:-1px;max-width:820px}
+.hero h1.name{font-family:var(--serif);font-size:clamp(22px,2.2vw,26px)}
+.hero .claim{font-family:var(--serif);font-size:clamp(32px,4.4vw,54px);line-height:1.12;font-weight:600;letter-spacing:-.4px;max-width:820px}
 .hero p.lead{font-size:clamp(18px,2vw,21px);color:rgba(255,255,255,.8);max-width:680px;margin-top:24px}
 .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 24px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s ease,background .15s ease}
@@ -51,7 +55,7 @@ section{padding:100px 0}
 section.soft{background:var(--bg-soft)}
 .sec-head{max-width:720px;margin-bottom:52px}
 .sec-head .eyebrow{color:var(--navy-3)}
-h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.6px;color:var(--navy)}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.4vw,42px);line-height:1.15;letter-spacing:-.3px;color:var(--navy)}
 .sec-head p{color:var(--muted);margin-top:16px;font-size:18px}
 
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
@@ -67,8 +71,9 @@ h2{font-size:clamp(28px,3.4vw,40px);line-height:1.15;letter-spacing:-.6px;color:
 /* Profile */
 .profile{display:grid;grid-template-columns:1.25fr 1fr;gap:64px;align-items:start}
 .profile p{margin-bottom:18px;color:#2b3a55}
-.creds{background:var(--navy);color:#fff;border-radius:var(--radius);padding:36px}
-.creds h3{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.creds{background:var(--navy);color:#fff;border-radius:var(--radius);padding:36px;border-top:3px solid var(--gold)}
+.creds h3{font-size:14px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.creds a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
 .creds ul{list-style:none}
 .creds li{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15.5px}
 .creds li:last-child{border:0}
@@ -105,7 +110,7 @@ footer a:hover{color:#fff}
 
 /* Legal pages */
 .legal{padding:80px 0;max-width:780px}
-.legal h1{color:var(--navy);font-size:36px;margin-bottom:28px;letter-spacing:-.5px}
+.legal h1{color:var(--navy);font-family:var(--serif);font-size:38px;margin-bottom:28px}
 .legal h2{font-size:21px;margin:34px 0 10px}
 .legal p,.legal li{color:#2b3a55;margin-bottom:12px}
 .legal ul{padding-left:20px}
@@ -174,3 +179,71 @@ footer a:hover{color:#fff}
   .hero svg.curves{width:520px;opacity:.25}
 }
 img{max-width:100%}
+
+/* Approach */
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ap{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;position:relative}
+.ap .no{font-family:var(--serif);font-size:15px;color:var(--gold);font-weight:700;letter-spacing:1px}
+.ap h3{font-family:var(--serif);font-size:22px;color:var(--navy);margin:8px 0 10px}
+.ap p{color:var(--muted);font-size:15.5px}
+.card h3{font-family:var(--serif);font-size:20px}
+.formats{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:34px}
+.formats span{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--navy-3)}
+.formats ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.formats li{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14.5px;color:var(--navy);font-weight:500}
+.contact .mail{margin-top:22px;font-size:15px}
+.contact .mail a{color:rgba(255,255,255,.75);text-decoration:none}
+footer .fb{display:flex;align-items:center;gap:10px}
+footer .fb svg{width:24px;height:24px}
+.eyebrow{color:var(--navy-3)}
+.hero .eyebrow{color:var(--accent)}
+@media (max-width:900px){.approach{grid-template-columns:1fr}}
+@media (max-width:420px){.brand .bn{font-size:16px}.brand small{font-size:9px;letter-spacing:1.6px}.brand svg{width:34px;height:34px}}
+.hero h1.name span{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif}
+.burger{flex:none}
+.top .wrap{gap:12px}
+.brand{min-width:0}
+
+/* ===== Light theme: more white, navy as accent ===== */
+header.top{background:rgba(255,255,255,.94);border-bottom:1px solid var(--line)}
+.brand{color:var(--navy)}
+.brand small{color:var(--muted);opacity:1}
+nav.main a{color:#33415c}
+nav.main a:hover{color:var(--navy)}
+.lang a{color:var(--muted)}
+.lang a[aria-current]{color:#fff;background:var(--navy)}
+.lang a:not([aria-current]):hover{border-color:var(--line);color:var(--navy)}
+.burger span{background:var(--navy)}
+.hero{background:radial-gradient(900px 500px at 90% -10%,#eaf0fb 0%,transparent 60%),linear-gradient(180deg,#fff 0%,#f7f9fc 100%);color:var(--ink);border-bottom:1px solid var(--line)}
+.hero h1.name{color:var(--navy)}
+.hero h1.name span{color:#3b6fd1}
+.hero .claim{color:var(--navy)}
+.hero p.lead{color:#3c4a63}
+.hero svg.curves{opacity:.5}
+.hero svg.curves path{stroke:#9db6e3}
+.btn.primary{background:var(--navy);color:#fff}
+.btn.primary:hover{background:var(--navy-3)}
+.btn.ghost{border:1px solid #c6d0e0;color:var(--navy)}
+.btn.ghost:hover{background:#eef2f8}
+.facts{border-top:1px solid var(--line)}
+.facts b{color:var(--navy)}
+.facts span{color:var(--muted)}
+.portrait img{box-shadow:0 30px 60px -28px rgba(11,31,58,.45),0 0 0 1px var(--line)}
+.portrait:before{border-color:rgba(201,169,97,.55)}
+section.soft{background:#f7f9fc}
+.creds{background:#fff;color:var(--ink);border:1px solid var(--line);border-top:3px solid var(--gold);box-shadow:0 18px 40px -30px rgba(11,31,58,.35)}
+.creds li{border-bottom:1px solid var(--line)}
+.creds li b{color:var(--navy)}
+.creds li span{color:var(--muted)}
+.creds a{color:var(--navy);border-bottom:1px solid rgba(11,31,58,.25)}
+.contact{background:#fff;color:var(--ink);border-top:1px solid var(--line)}
+.contact h2{color:var(--navy)}
+.contact p{color:#3c4a63}
+.contact .mail a{color:var(--navy-3)}
+footer{background:#fff;color:var(--muted);border-top:1px solid var(--line)}
+footer a{color:#33415c}
+footer a:hover{color:var(--navy)}
+@media (max-width:900px){
+  nav.main{background:#fff;border-bottom:1px solid var(--line);box-shadow:0 20px 30px -25px rgba(11,31,58,.3)}
+  nav.main a.nl{border-bottom:1px solid var(--line)}
+}
