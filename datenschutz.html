@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Datenschutzerklärung – Dr. Markus Schicks</title>
 <meta name="description" content="Datenschutzerklärung – Dr. Markus Schicks Consulting">
@@ -37,7 +38,7 @@
 <h2>2. Hosting</h2>
 <p>Diese Website wird über GitHub Pages (GitHub Inc., USA) bereitgestellt. Beim Aufruf der Seiten verarbeitet GitHub technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit des Zugriffs sowie Browserinformationen, um die Website auszuliefern und die Sicherheit zu gewährleisten (Art. 6 Abs. 1 lit. f DSGVO). GitHub ist nach dem EU-US Data Privacy Framework zertifiziert.</p>
 <h2>3. Keine Cookies, kein Tracking</h2>
-<p>Diese Website setzt keine Cookies, verwendet keine Analyse- oder Tracking-Werkzeuge und lädt keine externen Schriftarten oder Skripte.</p>
+<p>Diese Website setzt keine Cookies, verwendet keine Analyse- oder Tracking-Werkzeuge und lädt keine externen Schriftarten oder Skripte. Die passende Sprachversion wird beim ersten Aufruf anhand der Zeitzone Ihres Geräts gewählt; diese Information verlässt Ihren Browser nicht. Wählen Sie eine Sprache manuell, wird diese Auswahl lokal in Ihrem Browser gespeichert (localStorage) und nicht übertragen.</p>
 <h2>4. Kontaktaufnahme per E-Mail oder Telefon</h2>
 <p>Wenn Sie mich kontaktieren, verarbeite ich Ihre Angaben zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Die Daten werden gelöscht, sobald sie nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
 <h2>5. Ihre Rechte</h2>
@@ -46,6 +47,7 @@
 <span><a href="https://www.linkedin.com/in/markus-schicks-a7768b44/" rel="me noopener" target="_blank">LinkedIn</a><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></span></div></footer>
 <script>
 document.getElementById("y").textContent=new Date().getFullYear();
+document.querySelectorAll(".lang a").forEach(a=>a.addEventListener("click",()=>{try{localStorage.setItem("lang",a.lang)}catch(e){}}));
 const b=document.querySelector(".burger");b.addEventListener("click",()=>{const o=document.body.classList.toggle("nav-open");b.setAttribute("aria-expanded",o)});
 document.querySelectorAll("#mnav a").forEach(a=>a.addEventListener("click",()=>{document.body.classList.remove("nav-open");b.setAttribute("aria-expanded","false")}));
 if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}}),{threshold:.12});document.querySelectorAll(".reveal").forEach(el=>io.observe(el))}else{document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"))}
