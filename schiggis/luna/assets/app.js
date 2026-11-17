@@ -309,8 +309,9 @@
       const { sel, onlyWrong } = get();
       const term = norm(search.value || "");
       const w = wrongMap();
-      const items = filterVocab(sel, onlyWrong).filter(v => !term || norm(v.en + " " + v.de).includes(term));
-      count.textContent = items.length + " Wörter";
+      // Bei einer Suche wird immer in allen Abschnitten gesucht
+      const items = (term ? window.VOCAB : filterVocab(sel, onlyWrong)).filter(v => !term || norm(v.en + " " + v.de).includes(term));
+      count.textContent = items.length + (items.length === 1 ? " Wort" : " Wörter") + (term ? " (Suche in allen Abschnitten)" : "");
       let cur = "";
       listEl.innerHTML = items.map(v => {
         let h = "";
@@ -532,7 +533,7 @@
       el.textContent = "bestes Ergebnis: " + b + " %";
     });
     const wc = document.getElementById("wrong-count");
-    if (wc) wc.textContent = Object.keys(wrongMap()).length;
+    if (wc) { const n = Object.keys(wrongMap()).length; wc.textContent = n + (n === 1 ? " Wort" : " Wörter"); }
   }
 
   function initReveal() {
