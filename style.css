@@ -114,7 +114,7 @@ h2{font-family:var(--serif);font-weight:600;font-size:clamp(32px,3.6vw,46px);lin
 .pub{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:18px 0;border-top:1px solid var(--line)}
 .pub:last-child{border-bottom:1px solid var(--line)}
 .pub .y{font-family:var(--serif);font-weight:700;font-size:24px;color:var(--gold-d);line-height:1.2}
-.pub p{font-size:16px}
+.pub p{font-size:16px;min-width:0;overflow-wrap:anywhere;hyphens:auto}
 .pub a{color:var(--navy);text-decoration:none;font-weight:500;border-bottom:1px solid rgba(138,106,34,.35)}
 .pub a:hover{border-color:var(--gold)}
 .pub em{color:var(--muted);font-size:14.5px}
