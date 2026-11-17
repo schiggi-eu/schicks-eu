@@ -223,7 +223,7 @@ input[type=text]:focus, input[type=search]:focus { outline: none; border-color: 
 .quiz { max-width: 760px; scroll-margin-top: 90px; }
 h2[id] { scroll-margin-top: 90px; }
 .progress { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0 14px; }
-.progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--orange-2), var(--orange)); width: 0; transition: width .25s; }
+.progress > span { display: block; height: 100%; background: linear-gradient(90deg, var(--orange-2), var(--orange)); width: 0; transition: width .25s; }
 .q-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); background: #fff; }
 .q-num { color: var(--muted); font-size: .9rem; font-weight: 600; }
 .q-text { font-size: 1.15rem; margin: 6px 0 14px; }

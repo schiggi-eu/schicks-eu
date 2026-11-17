@@ -1,0 +1,137 @@
+/* Schiggis – Startseite. Aufbau der Leiste wie auf schicks.eu, Farben „Curaçao“ wie Luna/Luke. */
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/cormorant-garamond-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/cormorant-garamond-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/inter-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/inter-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/inter-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/inter-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/inter-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  --deep:#004f7f; --deep2:#005f96; --blue:#0069a8; --cyan:#00d2ff; --cyan-2:#7de8ff; --cyan-soft:#e3f9ff;
+  --orange:#ff9500; --gold:#ffcc00; --orange-dark:#a34d00; --orange-soft:#fff4d6;
+  --ink:#04223a; --muted:#4f6473; --line:#dde8ee;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  --wrap:1140px; --pad:max(24px,calc((100vw - var(--wrap))/2));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);font-variant-numeric:lining-nums;color:var(--ink);background:#fff;line-height:1.6;font-size:16px}
+a{color:var(--blue)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+
+/* ---------- Leiste (wie schicks.eu: sticky, 72px, Marke links, Navigation in Großbuchstaben, Sprachwahl) */
+.top{position:sticky;top:0;z-index:50;background:var(--deep);color:#fff;border-bottom:3px solid transparent;
+  border-image:linear-gradient(90deg,var(--orange),var(--gold)) 1}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;max-width:none;padding:0 var(--pad)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.brand .mark{width:40px;height:40px;flex:none}
+.bn{font-family:var(--serif);font-weight:700;font-size:24px;line-height:1.05;letter-spacing:.005em}
+.bn small{display:block;font-family:var(--sans);font-weight:500;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+
+nav.main{display:flex;align-items:center;gap:28px}
+nav.main .nl{font:inherit;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#d6f1fb;background:none;border:0;cursor:pointer;padding:8px 0;display:inline-flex;align-items:center;gap:7px}
+nav.main .nl:hover,nav.main .dd.open>.nl{color:#fff}
+.car{width:7px;height:7px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+.dd.open .car{transform:translateY(1px) rotate(-135deg)}
+
+.dd{position:relative}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:-18px;min-width:230px;background:#fff;border-radius:14px;padding:10px;
+  box-shadow:0 14px 40px rgba(0,40,70,.25);opacity:0;visibility:hidden;transform:translateY(-6px);transition:opacity .15s,transform .15s,visibility .15s}
+.dd-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px} /* Hover-Brücke */
+.dd.open .dd-menu{opacity:1;visibility:visible;transform:none}
+@media (hover:hover) and (min-width:861px){ .dd:hover .dd-menu,.dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:none} .dd:hover .car{transform:translateY(1px) rotate(-135deg)} }
+.dd-head{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:6px 12px 8px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.dot.sun{background:linear-gradient(135deg,var(--gold),var(--orange))}
+.dot.sea{background:linear-gradient(135deg,var(--cyan-2),var(--cyan))}
+.dd-menu a{display:block;padding:9px 12px;border-radius:9px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:var(--cyan-soft);color:var(--deep);outline:none}
+
+.lang{display:flex;gap:2px;margin-left:8px;padding-left:20px;border-left:1px solid rgba(255,255,255,.22)}
+.lang a{font-size:12px;font-weight:600;letter-spacing:.08em;text-decoration:none;color:#b9e3f4;padding:5px 7px;border-radius:4px}
+.lang a:hover{color:#fff}
+.lang a[aria-current=true]{color:var(--ink);background:var(--gold)}
+
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;flex-direction:column;justify-content:center;gap:6px;align-items:center}
+.burger span{display:block;width:22px;height:2px;background:#fff;transition:.25s}
+.nav-open .burger span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.nav-open .burger span:nth-child(2){opacity:0}
+.nav-open .burger span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+@media (max-width:860px){
+  .burger{display:flex}
+  .bn{font-size:21px}
+  .bn small{letter-spacing:.12em;font-size:9.5px}
+  nav.main{position:fixed;inset:75px 0 auto 0;background:var(--deep);flex-direction:column;align-items:stretch;gap:0;padding:6px 24px 22px;
+    border-bottom:3px solid var(--orange);transform:translateY(calc(-100% - 90px));visibility:hidden;transition:transform .3s,visibility .3s;max-height:calc(100vh - 75px);overflow:auto}
+  .nav-open nav.main{transform:none;visibility:visible}
+  .dd{border-bottom:1px solid rgba(255,255,255,.1)}
+  nav.main .nl{width:100%;justify-content:space-between;padding:15px 0;font-size:13px}
+  .dd-menu{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;background:transparent;padding:0 0 10px;min-width:0;border-radius:0;display:none}
+  .dd-menu::before{display:none}
+  .dd.open .dd-menu{display:block}
+  .dd-head{color:var(--gold);border-color:rgba(255,255,255,.12)}
+  .dd-menu a{color:#e6f7fd;padding:10px 12px}
+  .dd-menu a:hover,.dd-menu a:focus-visible{background:rgba(255,255,255,.08);color:#fff}
+  .lang{margin:16px 0 0;padding:0;border:0}
+}
+
+/* ---------- Willkommen */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#bff3ff 0%,var(--cyan-2) 45%,var(--cyan) 100%);color:var(--ink)}
+.sunrise{position:absolute;left:50%;bottom:-210px;width:520px;height:520px;margin-left:-260px;border-radius:50%;
+  background:radial-gradient(circle,var(--gold) 0 46%,var(--orange) 62%,rgba(255,149,0,0) 71%);opacity:.9}
+.hero-in{position:relative;text-align:center;padding:64px 24px 120px}
+.hello{display:flex;flex-direction:column;align-items:center;gap:2px;min-height:5.2rem}
+.hello-word{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.05;color:var(--deep);transition:opacity .35s,transform .35s}
+.hello-word.out{opacity:0;transform:translateY(8px)}
+.hello-lang{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.15;margin-top:22px;color:var(--ink)}
+.lead{max-width:36rem;margin:12px auto 0;font-size:1.08rem;color:#0b3550}
+.waves{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:70px;display:block}
+
+/* ---------- Karten */
+.cards{padding-top:28px;padding-bottom:20px}
+h2{font-family:var(--serif);font-weight:700;font-size:1.9rem;line-height:1.2;color:var(--deep);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{position:relative;border-radius:20px;padding:24px 24px 22px;border:1px solid var(--line);background:#fff;box-shadow:0 6px 24px rgba(0,79,127,.08);display:flex;flex-direction:column}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;border-radius:20px 20px 0 0}
+.card.luna::before{background:linear-gradient(90deg,var(--gold),var(--orange))}
+.card.luke::before{background:linear-gradient(90deg,var(--cyan-2),var(--cyan))}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.badge{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.luna .badge{background:var(--orange-soft);color:var(--orange-dark)}
+.luke .badge{background:var(--cyan-soft);color:var(--blue)}
+.emoji{font-size:1.6rem}
+.card h3{font-family:var(--serif);font-size:1.6rem;line-height:1.2;margin:4px 0 6px}
+.card p{color:var(--muted)}
+.links{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
+.links a{display:inline-block;padding:6px 13px;border-radius:999px;border:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px;font-weight:500;background:#fbfdfe}
+.links a:hover{border-color:var(--cyan);background:var(--cyan-soft)}
+.go{margin-top:auto;align-self:flex-start;text-decoration:none;font-weight:600;padding:11px 20px;border-radius:12px;color:var(--ink)}
+.luna .go{background:linear-gradient(135deg,var(--gold),var(--orange))}
+.luke .go{background:linear-gradient(135deg,var(--cyan-2),var(--cyan))}
+.go:hover{filter:brightness(1.05)}
+.note{margin-top:14px;color:var(--muted);font-size:.95rem}
+.note:empty{display:none}
+
+/* ---------- Sprachen */
+.many{padding-top:26px;padding-bottom:48px}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+.chips li{padding:8px 15px;border-radius:999px;background:var(--cyan-soft);color:var(--deep);font-weight:500;font-size:15px;display:flex;align-items:baseline;gap:8px}
+.chips li:nth-child(3n+2){background:var(--orange-soft);color:var(--orange-dark)}
+.chips li small{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+
+/* ---------- Fuß */
+.foot{background:var(--deep);color:#cdeefa;font-size:13px}
+.foot .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px}
+.sun-dot{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--orange));flex:none}
+
+@media (max-width:700px){
+  .grid{grid-template-columns:1fr}
+  .hero-in{padding:44px 20px 100px}
+  .sunrise{width:380px;height:380px;margin-left:-190px;bottom:-160px}
+}
+@media (prefers-reduced-motion:reduce){ .hello-word,.dd-menu,nav.main,.car{transition:none} html{scroll-behavior:auto} }
