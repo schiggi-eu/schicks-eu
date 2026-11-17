@@ -4,17 +4,17 @@
 
   // Nummern wie auf dem Arbeitsblatt; x/y = Position der Nummer auf der Karte in %
   const RIVERS = [
-    { n: 1,  name: "Miño",         sea: "atl", x: 84.0, y: 22.5 },
-    { n: 2,  name: "Duero",        sea: "atl", x: 70.4, y: 37.9 },
-    { n: 3,  name: "Tajo",         sea: "atl", x: 49.6, y: 37.8 },
-    { n: 4,  name: "Guadiana",     sea: "atl", x: 40.2, y: 37.6 },
-    { n: 5,  name: "Guadalquivir", sea: "atl", x: 24.9, y: 39.2 },
-    { n: 6,  name: "Segura",       sea: "med", x: 31.2, y: 69.1 },
-    { n: 7,  name: "Júcar",        sea: "med", x: 44.6, y: 69.7 },
-    { n: 8,  name: "Turia",        sea: "med", x: 54.7, y: 72.1 },
-    { n: 9,  name: "Ebro",         sea: "med", x: 69.3, y: 78.0 },
-    { n: 10, name: "Nervión",      sea: "can", x: 88.0, y: 55.2 },
-    { n: 11, name: "Nalón",        sea: "can", x: 88.8, y: 41.1 }
+    { n: 1,  name: "Miño",         sea: "atl", x: 22.5, y: 16.0 },
+    { n: 2,  name: "Duero",        sea: "atl", x: 37.9, y: 29.6 },
+    { n: 3,  name: "Tajo",         sea: "atl", x: 37.8, y: 50.4 },
+    { n: 4,  name: "Guadiana",     sea: "atl", x: 37.6, y: 59.8 },
+    { n: 5,  name: "Guadalquivir", sea: "atl", x: 39.2, y: 75.1 },
+    { n: 6,  name: "Segura",       sea: "med", x: 69.1, y: 68.8 },
+    { n: 7,  name: "Júcar",        sea: "med", x: 69.7, y: 55.4 },
+    { n: 8,  name: "Turia",        sea: "med", x: 72.1, y: 45.3 },
+    { n: 9,  name: "Ebro",         sea: "med", x: 78.0, y: 30.7 },
+    { n: 10, name: "Nervión",      sea: "can", x: 55.2, y: 12.0 },
+    { n: 11, name: "Nalón",        sea: "can", x: 41.1, y: 11.2 }
   ];
   const SEA = { atl: "Atlántico", med: "Mediterráneo", can: "Cantábrico" };
 
@@ -71,7 +71,7 @@
         <p><strong>In den Atlantik (Atlántico):</strong> 1–5 Miño, Duero, Tajo, Guadiana, Guadalquivir – von Norden nach Süden.<br>
         <strong>Ins Mittelmeer (Mediterráneo):</strong> 6–9 Segura, Júcar, Turia, Ebro – von Süden nach Norden.<br>
         <strong>Ins Kantabrische Meer (Cantábrico):</strong> 10 Nervión (bei Bilbao) und 11 Nalón (Asturien).</p>
-        <p class="de">Tipp: Auf dieser Karte ist Norden <strong>rechts</strong> (Frankreich und die Pyrenäen liegen unten rechts, Portugal oben).</p>
+        <p class="de">Tipp: Norden ist oben. Portugal liegt links, Frankreich und die Pyrenäen oben rechts. Auf dem Arbeitsblatt in der Schule ist die Karte evtl. gedreht (Norden rechts)!</p>
       </div>
       <div class="scores">${["mc", "type", "find"].map(m => { const s = (Store.get("scores", {})[m]); return `<span>${{ mc: "Auswählen", type: "Eintippen", find: "Auf der Karte" }[m]}: <strong>${s ? s.best + " %" : "–"}</strong></span>`; }).join("")}</div>`;
     function select(n) {
