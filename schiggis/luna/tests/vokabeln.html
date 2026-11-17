@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Vokabeltest · Luna lernt Englisch</title>
+<meta name="theme-color" content="#13a89e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Luna English">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../" data-page="t-vokabeln">
+<main>
+<div class="crumbs"><a href="../index.html">Start</a> › <a href="../tests/index.html">Tests</a> › Vokabeltest</div>
+<h1>Vokabeltest</h1>
+<p class="lead">Wähle Abschnitte und Testart, dann los! Falsche Wörter landen automatisch in deinen <strong>Fehlerwörtern</strong>.</p>
+
+<div class="settings">
+  <label>Abschnitte</label>
+  <div class="chips" id="vt-chips"></div>
+  <div class="grid two">
+    <div>
+      <label for="vt-mode">Testart</label>
+      <select id="vt-mode">
+        <option value="de-en">Deutsch → Englisch (eintippen)</option>
+        <option value="en-de">Englisch → Deutsch (ankreuzen)</option>
+        <option value="satz">Lückensatz (eintippen)</option>
+      </select>
+    </div>
+    <div>
+      <label for="vt-count">Anzahl Wörter</label>
+      <select id="vt-count">
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="0">alle</option>
+      </select>
+    </div>
+  </div>
+  <div class="btn-row"><button class="btn" id="vt-start">▶ Test starten</button></div>
+</div>
+
+<div class="quiz" id="vocab-test"></div>
+<p class="de">Beim Eintippen kannst du „to“ vor Verben weglassen. Für Wörter mit mehreren Bedeutungen reicht die englische Grundform.</p>
+
+</main>
+<script src="../assets/data/vocab.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

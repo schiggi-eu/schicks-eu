@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Vokabeln · Luna lernt Englisch</title>
+<meta name="theme-color" content="#13a89e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Luna English">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../" data-page="vokabeln">
+<main>
+<div class="crumbs"><a href="../index.html">Start</a> › Vokabeln</div>
+<h1>Vokabeln Unit 1</h1>
+<p class="lead">Alle Wörter aus <em>„The weekend workshop“</em> (Buch S. 185–189). Tippe auf 🔊, um das Wort zu hören.</p>
+
+<div class="btn-row" role="tablist">
+  <button class="btn teal" id="tab-liste" role="tab">📋 Liste</button>
+  <button class="btn ghost" id="tab-karten" role="tab">🃏 Karteikarten</button>
+  <a class="btn ghost" href="../tests/vokabeln.html">✅ Vokabeltest</a>
+</div>
+
+<section id="sec-liste">
+  <div class="chips" id="vocab-chips"></div>
+  <input type="search" id="vocab-search" placeholder="Suchen (Englisch oder Deutsch) …" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <p class="de" id="vocab-count" style="margin:8px 0 0"></p>
+  <ul class="vocab-list" id="vocab-list"></ul>
+
+  <div class="box rule">
+    <strong class="label">Lerntipps</strong>
+    <ul style="margin:0;padding-left:20px">
+      <li>Lerne lieber jeden Tag 10–15 Minuten als einmal zwei Stunden.</li>
+      <li>Sprich jedes Wort laut nach – besonders <em>scholarship</em>, <em>unpopular</em>, <em>wealth</em>, <em>rough</em>.</li>
+      <li>Achte auf Wortfamilien: <em>change → to change</em>, <em>improvement → to improve</em>, <em>autism → autistic</em>, <em>darkness → dark</em>.</li>
+      <li>Gegensätze helfen: <em>upper class ↔ working class</em>, <em>popular ↔ unpopular</em>, <em>Catholic ↔ Protestant</em>.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="sec-karten" hidden>
+  <div class="settings">
+    <label for="flash-dir">Richtung</label>
+    <select id="flash-dir">
+      <option value="en-de">Englisch → Deutsch</option>
+      <option value="de-en">Deutsch → Englisch</option>
+    </select>
+    <label>Abschnitte</label>
+    <div class="chips" id="flash-chips"></div>
+  </div>
+  <div class="flash-wrap" id="vocab-flash"></div>
+  <p class="de" style="text-align:center">„✗ Nochmal“ legt die Karte ans Ende und merkt sie als Fehlerwort. „✓ Wusste ich“ nimmt sie wieder von der Fehlerliste.</p>
+</section>
+
+<script>
+(function () {
+  var tl = document.getElementById("tab-liste"), tk = document.getElementById("tab-karten");
+  var sl = document.getElementById("sec-liste"), sk = document.getElementById("sec-karten");
+  function show(k) {
+    var karten = k === "karten";
+    sl.hidden = karten; sk.hidden = !karten;
+    tl.className = "btn " + (karten ? "ghost" : "teal");
+    tk.className = "btn " + (karten ? "teal" : "ghost");
+  }
+  tl.onclick = function () { show("liste"); history.replaceState(null, "", "#liste"); };
+  tk.onclick = function () { show("karten"); history.replaceState(null, "", "#karten"); };
+  if (location.hash === "#karten") show("karten");
+})();
+</script>
+
+</main>
+<script src="../assets/data/vocab.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
