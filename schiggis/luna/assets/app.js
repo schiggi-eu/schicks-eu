@@ -8,6 +8,7 @@
   // ---------------------------------------------------------------- Navigation
   const NAV = [
     { k: "home", t: "Start", h: "index.html" },
+    { k: "crash", t: "⚡ Crashkurs", h: "crashkurs.html" },
     { k: "vokabeln", t: "Vokabeln", h: "vokabeln/index.html" },
     { k: "grammatik", t: "Grammatik", h: "grammatik/index.html", sub: [
       { k: "g-modal", t: "Modalverben & Ersatzformen", h: "grammatik/modalverben.html" },
@@ -382,6 +383,22 @@
     start();
   }
 
+  // ---- Crashkurs-Karteikarten (Kernwörter)
+  function initCrashFlash() {
+    const el = document.getElementById("crash-flash");
+    if (!el || !window.CRASH_VOCAB) return;
+    const dirSel = document.getElementById("crash-dir");
+    const core = window.VOCAB.filter(v => window.CRASH_VOCAB.includes(v.en));
+    function start() {
+      const de2en = dirSel && dirSel.value === "de-en";
+      Flashcards(el, core.map(v => de2en
+        ? { front: v.de, back: v.en, backSmall: v.ex, key: v.en, say: v.en }
+        : { front: v.en, frontSmall: v.ipa ? "[" + v.ipa + "]" : "", back: v.de, backSmall: v.ex, key: v.en, say: v.en }));
+    }
+    if (dirSel) dirSel.addEventListener("change", start);
+    start();
+  }
+
   // ---- Vokabeltest
   function blankSentence(v) {
     if (!v.ex) return null;
@@ -532,7 +549,7 @@
   // ---------------------------------------------------------------- Start
   document.addEventListener("DOMContentLoaded", () => {
     buildLayout();
-    initVocabList(); initVocabFlash(); initVocabTest();
+    initVocabList(); initVocabFlash(); initVocabTest(); initCrashFlash();
     initVerbTable(); initVerbFlash(); initVerbTest();
     initBankQuizzes(); initChecklists(); initScores(); initReveal();
     document.querySelectorAll("[data-say]").forEach(b => { if (!b.closest("#vocab-list") && !b.closest("#verb-table")) b.addEventListener("click", () => speak(b.dataset.say)); });
