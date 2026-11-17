@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Ríos de España · Luke</title>
+<meta name="theme-color" content="#00d2ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ríos de España">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="icon" type="image/png" href="assets/icon-180.png">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/luke.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="index.html"><span class="moon">≈</span><span>Luke lernt Flüsse<small>Ríos de España</small></span></a>
+  </div>
+</header>
+<main>
+  <nav class="tabs" aria-label="Modus">
+    <a href="#lernen"><span class="ico">📖 </span>Lernen</a>
+    <a href="#multiple-choice"><span class="ico">🔘 </span>Auswählen</a>
+    <a href="#eingeben"><span class="ico">⌨️ </span>Eintippen</a>
+    <a href="#karte"><span class="ico">📍 </span><span class="lg">Auf der </span>Karte</a>
+  </nav>
+  <div class="luke-grid">
+    <div class="map-col">
+      <div class="map" id="map">
+        <img src="assets/karte.png" alt="Karte der Iberischen Halbinsel mit den Flüssen 1 bis 11" draggable="false">
+        <span class="compass">Norden →</span>
+      </div>
+      <div class="map-caption" id="map-caption"></div>
+      <div class="legend"><span><i style="background:var(--teal)"></i>Atlantik</span><span><i style="background:var(--orange-2)"></i>Mittelmeer</span><span><i style="background:#b9f0ff"></i>Kantabrisches Meer</span></div>
+    </div>
+    <section id="panel" aria-live="polite"></section>
+  </div>
+</main>
+<footer class="site-footer">Privater Lernbereich · Ergebnisse werden nur auf diesem Gerät gespeichert</footer>
+<script src="assets/luke.js"></script>
+</body>
+</html>
