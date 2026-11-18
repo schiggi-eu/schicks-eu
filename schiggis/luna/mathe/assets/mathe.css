@@ -14,7 +14,7 @@
 }
 .tabs a.on { background: var(--teal-dark); border-color: var(--teal-dark); color: #fff; }
 @media (max-width: 640px) {
-  .tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; top: 60px; }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; top: 60px; }
   .tabs a { min-height: 38px; padding: 0 2px; font-size: .78rem; white-space: nowrap; justify-content: center; }
   .tabs .ico { display: none; }
   .brand small { display: none; }

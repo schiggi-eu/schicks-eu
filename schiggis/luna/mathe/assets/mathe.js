@@ -1,4 +1,4 @@
-/* Luna – Mathe „Terme mit einer Variablen“ · Engine: Term-Parser, Prüfung, Darstellung, Tabs, Blitz-Training */
+/* Luna – Mathe „Terme mit einer Variablen“ · Engine: Term-Parser, Prüfung, Darstellung, Tabs */
 (function () {
   "use strict";
 
@@ -342,7 +342,7 @@
       const rows = data.tasks.map((t, ti) => { const r = checkTask(sec, t, ti, el); got += r.got; total += r.total; return { t, r }; });
       const pct = Math.round(100 * got / total);
       saveScore("mathe-" + sec, got, total);
-      const msg = pct >= 90 ? "Super! Das sitzt. 🌟" : pct >= 75 ? "Gut gemacht! 💪 Schau dir die Fehler noch einmal an." : pct >= 50 ? "Ordentlich – die roten Aufgaben bitte nochmal üben. 🙂" : "Weiter üben – lies dir den Spickzettel nochmal durch. 📚";
+      const msg = pct >= 90 ? "Super! Das sitzt. 🌟" : pct >= 75 ? "Gut gemacht! 💪 Schau dir die Fehler noch einmal an." : pct >= 50 ? "Ordentlich – die roten Aufgaben bitte nochmal üben. 🙂" : "Weiter üben – schau dir die Lösungswege an. 📚";
       const box = el.querySelector(".msummary");
       box.hidden = false;
       box.innerHTML = `<div class="result"><div class="score">${fmtPts(got)} / ${total}</div><div>Punkte · ${pct} % · ${msg}</div>
@@ -360,88 +360,6 @@
       saveInputs(m);
       mountSection(el, sec, data, opts);
     });
-  }
-
-  // ================================================================ Blitz-Training (Zufallsaufgaben)
-  function rnd(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
-  function rndNZ(a, b) { let x; do { x = rnd(a, b); } while (x === 0); return x; }
-  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
-  function dnum(x) { return String(+x.toFixed(4)).replace("-", "−").replace(".", ","); }
-  function paren(x) { return x < 0 ? "(" + dnum(x) + ")" : dnum(x); }
-  // linearer Term c·v + d in Anzeige-Schreibweise
-  function lin(c, d, v) {
-    let s = "";
-    if (c) s = (c === 1 ? "" : c === -1 ? "−" : dnum(c)) + v;
-    if (d) s += s ? (d < 0 ? " − " + dnum(-d) : " + " + dnum(d)) : dnum(d);
-    return s || "0";
-  }
-  function signed(s) { return s.startsWith("−") ? " − " + s.slice(1) : " + " + s; }
-
-  const GEN = {
-    zusammen() {
-      const v = pick(["x", "a", "y"]);
-      const a = rndNZ(-9, 9), b = rndNZ(-9, 9), c = rndNZ(-9, 9), d = rndNZ(-9, 9);
-      if (a + c === 0) return GEN.zusammen();
-      return { q: lin(a, 0, v) + signed(dnum(b)) + signed(lin(c, 0, v)) + signed(dnum(d)), k: "simp", a: lin(a + c, b + d, v), t: "Fasse zusammen" };
-    },
-    klammer() {
-      const v = pick(["x", "b", "z"]);
-      const k = rndNZ(-8, 8) || 2, a = rndNZ(-6, 6), b = rndNZ(-9, 9);
-      if (Math.abs(k) === 1) return GEN.klammer();
-      const front = Math.random() < 0.6;
-      const q = front ? paren(k) + " · (" + lin(a, b, v) + ")" : "(" + lin(a, b, v) + ") · " + paren(k);
-      return { q, k: "simp", a: lin(k * a, k * b, v), t: "Löse die Klammer auf" };
-    },
-    minus() {
-      const v = pick(["x", "y", "w"]);
-      const a = rndNZ(-9, 9), b = rndNZ(-9, 9), c = rndNZ(-9, 9);
-      if (a - b === 0) return GEN.minus();
-      return { q: lin(a, 0, v) + " − (" + lin(b, c, v) + ")", k: "simp", a: lin(a - b, -c, v), t: "Minusklammer auflösen" };
-    },
-    ausklammern() {
-      const v = pick(["x", "a", "v"]);
-      let a, b;
-      do { a = rndNZ(1, 7); b = rndNZ(-9, 9); } while (gcd(a, b) !== 1);
-      const k = rnd(2, 9) * (Math.random() < 0.3 ? -1 : 1);
-      return { q: lin(k * a, k * b, v), k: "fac", kk: Math.abs(k), a: dnum(k) + " · (" + lin(a, b, v) + ")", t: "Klammere die größtmögliche Zahl aus", noeq: false };
-    },
-    einsetzen() {
-      const a = rndNZ(-6, 6), b = rndNZ(-9, 9);
-      const x = pick([-3, -2, -1, 2, 3, 4, 0.5, -0.5]);
-      return { q: lin(a, b, "x") + "   für x = " + dnum(x), k: "num", a: String(a * x + b), t: "Setze ein und berechne", noeq: true, p: "Ergebnis:" };
-    },
-    bruch() {
-      const v = pick(["x", "u"]);
-      const den = pick([2, 3, 4, 5]);
-      const a = rndNZ(-4, 4) * den, b = rndNZ(-5, 5) * den;
-      const q = "{1/" + den + "} · (" + lin(a, b, v) + ")";
-      return { q, k: "simp", a: lin(a / den, b / den, v), t: "Vereinfache" };
-    }
-  };
-
-  function mountBlitz(el) {
-    function newSet() {
-      const kinds = Object.keys(GEN);
-      const items = [];
-      for (let i = 0; i < 10; i++) {
-        const g = GEN[kinds[i % kinds.length]]();
-        items.push(Object.assign(g, { l: String.fromCharCode(97 + i) + ")", q: g.q }));
-      }
-      // Reihenfolge mischen
-      for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
-      items.forEach((it, i) => { it.l = String.fromCharCode(97 + i) + ")"; it.q = it.q; it.h = it.t; });
-      const data = { tasks: [{ n: "⚡", t: "10 Zufallsaufgaben – jede Runde neu", h: "Gemischt: zusammenfassen, Klammern auflösen, Minusklammer, ausklammern, einsetzen, Brüche.", items: items.map(it => Object.assign(it, { q: it.q, l: it.l + " " + it.t + ":" })) }] };
-      // Blitz-Eingaben nicht dauerhaft speichern
-      const m = loadInputs(); Object.keys(m).filter(k => k.startsWith("blitz/")).forEach(k => delete m[k]); saveInputs(m);
-      mountSection(el, "blitz", data);
-      const row = el.querySelector(".final");
-      const b = document.createElement("button");
-      b.className = "btn teal"; b.textContent = "🔄 Neue Aufgaben";
-      b.addEventListener("click", () => { newSet(); el.scrollIntoView({ behavior: "smooth", block: "start" }); });
-      row.prepend(b);
-      el.querySelector(".clear").remove();
-    }
-    newSet();
   }
 
   // ================================================================ Tastenleiste (iPad/Handy)
@@ -468,13 +386,13 @@
   }
 
   // ================================================================ Tabs
-  const TABS = ["spickzettel", "training", "runde-1", "runde-2", "blitz"];
+  const TABS = ["runde-1", "runde-2"];
   function showTab() {
     let key = (location.hash || "").slice(1);
     let anchor = null;
     if (!TABS.includes(key)) {
-      const m = key.match(/^(training|runde-1|runde-2|blitz)-a/);
-      if (m) { anchor = key; key = m[1]; } else key = "spickzettel";
+      const m = key.match(/^(runde-1|runde-2)-a/);
+      if (m) { anchor = key; key = m[1]; } else key = "runde-1";
     }
     document.querySelectorAll("[data-tab]").forEach(s => { s.hidden = s.dataset.tab !== key; });
     document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + key));
@@ -495,13 +413,11 @@
   document.addEventListener("DOMContentLoaded", () => {
     const D = window.MATHE;
     if (D) {
-      const map = { training: "training", "runde-1": "runde1", "runde-2": "runde2" };
+      const map = { "runde-1": "runde1", "runde-2": "runde2" };
       Object.keys(map).forEach(sec => {
         const el = document.getElementById("sec-" + sec);
         if (el && D[map[sec]]) mountSection(el, sec, D[map[sec]], { onScore: initScores });
       });
-      const bl = document.getElementById("sec-blitz");
-      if (bl) mountBlitz(bl);
     }
     initKeybar();
     initScores();
@@ -509,5 +425,5 @@
     showTab();
   });
 
-  window.MatheEngine = { toMachine, parse, equiv, value, normalInfo, readNumber, checkField, GEN };
+  window.MatheEngine = { toMachine, parse, equiv, value, normalInfo, readNumber, checkField };
 })();
