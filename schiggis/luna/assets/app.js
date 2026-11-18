@@ -25,7 +25,8 @@
       { k: "t-vokabeln", t: "Vokabeltest", h: "tests/vokabeln.html" },
       { k: "t-grammatik", t: "Grammatiktest", h: "tests/grammatik/index.html" },
       { k: "t-inhalt", t: "Inhaltstest", h: "tests/inhalt.html" }
-    ] }
+    ] },
+    { k: "mathe", t: "🧮 Mathe", h: "mathe/index.html" }
   ];
 
   function isActive(item) {
