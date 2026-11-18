@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>ser &amp; estar · Luke</title>
+<meta name="theme-color" content="#00d2ff">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 14px; }
+  .tabs a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px;
+    border: 2px solid var(--line); background: #fff; color: var(--ink); font-weight: 700; text-decoration: none; font-size: .95rem; }
+  .tabs a.on { background: var(--teal-dark); border-color: var(--teal-dark); color: #fff; }
+  .rule-line { margin: 0 0 14px; color: var(--muted); }
+  .rule-line b { color: var(--ink); }
+
+  /* Puzzle */
+  .pz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; max-width: 560px; }
+  .pz .col { display: flex; flex-direction: column; gap: 10px; }
+  .pc { position: relative; min-height: 54px; border: 0; border-radius: 12px; font-size: 1.15rem; font-weight: 800;
+    color: var(--ink); cursor: pointer; padding: 0 14px; text-align: center; transition: transform .12s, opacity .3s; }
+  .pc.de { background: var(--teal-2); margin-right: 12px; }
+  .pc.de::after { content: ""; position: absolute; right: -12px; top: 50%; width: 24px; height: 24px; margin-top: -12px;
+    border-radius: 50%; background: inherit; }
+  .pc.es { background: var(--orange-2); padding-left: 24px;
+    -webkit-mask: radial-gradient(circle 12.5px at 0 50%, transparent 98%, #000 100%);
+            mask: radial-gradient(circle 12.5px at 0 50%, transparent 98%, #000 100%); }
+  .pc.sel { transform: scale(1.06); box-shadow: 0 0 0 3px var(--teal-dark); }
+  .pc.es.sel { box-shadow: none; filter: drop-shadow(0 0 0 var(--orange-dark)) brightness(.92); }
+  .pc.gone { visibility: hidden; }
+  .pc.shake { animation: shake .35s; }
+  @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+  .done-list { display: flex; flex-direction: column; gap: 8px; margin: 18px 0 0; max-width: 560px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; animation: snap .3s ease-out; }
+  .pair .pc { cursor: default; margin-right: 0; display: flex; align-items: center; justify-content: center; }
+  .pair .pc.de { border-radius: 12px 0 0 12px; z-index: 1; }
+  .pair .pc.es { border-radius: 0 12px 12px 0; }
+  @keyframes snap { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .msg { min-height: 1.6em; font-weight: 700; margin: 12px 0; }
+  .msg.ok { color: var(--ok); }
+  .msg.bad { color: var(--bad); }
+
+  /* Karteikarten */
+  .flip { perspective: 900px; max-width: 420px; height: 220px; margin: 8px 0 12px; cursor: pointer; }
+  .flip-in { position: relative; width: 100%; height: 100%; transition: transform .45s; transform-style: preserve-3d; }
+  .flip.on .flip-in { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .face.front { background: var(--teal-soft); }
+  .face.back { background: var(--orange-soft); transform: rotateY(180deg); }
+  .face .big { font-size: 2rem; font-weight: 800; }
+  .face .tag { font-size: .85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+  .face .hint { font-size: .85rem; color: var(--muted); margin-top: 10px; }
+  .face .say { align-self: center; position: static; display: inline-grid; place-items: center; width: auto; height: auto; min-width: 52px; min-height: 44px; border-radius: 12px; border: 2px solid var(--orange); background: #fff; font-size: 1.2rem; margin-top: 10px; cursor: pointer; }
+
+  /* Test */
+  .test { border-collapse: collapse; width: 100%; max-width: 560px; min-width: 0; }
+  .test td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; font-size: 1.1rem; }
+  .test td.q { font-weight: 700; width: 38%; }
+  .test td.q small { display: block; font-weight: 600; color: var(--muted); font-size: .8rem; }
+  .test input { width: 100%; min-height: 46px; font-size: 1.1rem; padding: 0 10px; border: 2px solid var(--line); border-radius: 10px; }
+  .test input.ok { border-color: var(--ok); background: var(--teal-soft); }
+  .test input.bad { border-color: var(--bad); background: #fdecec; }
+  .test .sol { font-size: .9rem; color: var(--bad); font-weight: 700; min-height: 1em; }
+  .test .sol.ok { color: var(--ok); }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="../index.html"><span class="moon">ñ</span><span>Luke lernt Spanisch<small>ser &amp; estar</small></span></a>
+  </div>
+</header>
+<main>
+  <nav class="tabs" aria-label="Spiel">
+    <a href="#puzzle-ser">🧩 Puzzle ser</a>
+    <a href="#puzzle-estar">🧩 Puzzle estar</a>
+    <a href="#karten">🃏 Karteikarten</a>
+    <a href="#test">✏️ Test</a>
+  </nav>
+  <p class="rule-line"><b>ser</b> = wer oder was jemand ist (Name, Herkunft, Eigenschaft) · <b>estar</b> = wo oder wie jemand ist (Ort, Befinden)</p>
+  <section id="panel" aria-live="polite"></section>
+</main>
+<footer class="site-footer">Privater Lernbereich</footer>
+<script>
+(function () {
+  "use strict";
+  // Personen: Deutsch, erlaubte Pronomen, Anzeige-Pronomen, ser, estar
+  const P = [
+    { de: "ich bin",   pr: ["yo"],                   show: "yo",            ser: "soy",   estar: "estoy" },
+    { de: "du bist",   pr: ["tú"],                   show: "tú",            ser: "eres",  estar: "estás" },
+    { de: "er ist",    pr: ["él"],                   show: "él",            ser: "es",    estar: "está" },
+    { de: "sie ist",   pr: ["ella"],                 show: "ella",          ser: "es",    estar: "está" },
+    { de: "wir sind",  pr: ["nosotros", "nosotras"], show: "nosotros",      ser: "somos", estar: "estamos" },
+    { de: "ihr seid",  pr: ["vosotros", "vosotras"], show: "vosotros",      ser: "sois",  estar: "estáis" },
+    { de: "sie sind",  pr: ["ellos", "ellas"],       show: "ellos / ellas", ser: "son",   estar: "están" }
+  ];
+  const VERBS = ["ser", "estar"];
+  const panel = document.getElementById("panel");
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const es = (p, v) => p.show + " " + p[v];
+
+  // Vergleich: Akzente egal, Pronomen optional (muss aber passen, falls geschrieben)
+  const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-zñ ]/g, " ").replace(/\s+/g, " ").trim();
+  function correct(input, p, v) {
+    const t = norm(input).split(" ").filter(Boolean);
+    const verb = norm(p[v]);
+    if (t.length === 1) return t[0] === verb;
+    if (t.length === 2) return p.pr.map(norm).includes(t[0]) && t[1] === verb;
+    return false;
+  }
+
+  let voice = null;
+  function pickVoice() { const vs = speechSynthesis.getVoices(); voice = vs.find(x => x.lang === "es-ES") || vs.find(x => x.lang && x.lang.startsWith("es")) || null; }
+  if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function speak(t) {
+    if (!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t.replace(" / ", ", ")); u.lang = "es-ES"; if (voice) u.voice = voice; u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }
+
+  // ---------- Puzzle
+  function puzzle(v) {
+    panel.innerHTML =
+      '<h2>Puzzle: ' + v + '</h2><p>Tippe auf ein deutsches Teil und dann auf das passende spanische Teil.</p>' +
+      '<div class="pz"><div class="col" id="cde"></div><div class="col" id="ces"></div></div>' +
+      '<p class="msg" id="msg"></p><div class="done-list" id="done"></div>';
+    const cde = panel.querySelector("#cde"), ces = panel.querySelector("#ces"), msg = panel.querySelector("#msg"), done = panel.querySelector("#done");
+    shuffle(P.map((p, i) => i)).forEach(i => cde.insertAdjacentHTML("beforeend", '<button type="button" class="pc de" data-i="' + i + '">' + esc(P[i].de) + "</button>"));
+    shuffle(P.map((p, i) => i)).forEach(i => ces.insertAdjacentHTML("beforeend", '<button type="button" class="pc es" lang="es" data-i="' + i + '">' + esc(es(P[i], v)) + "</button>"));
+    let sel = null, left = P.length, errors = 0;
+    panel.querySelector(".pz").addEventListener("click", e => {
+      const b = e.target.closest(".pc"); if (!b || b.classList.contains("gone")) return;
+      if (!sel || sel.classList.contains(b.classList.contains("de") ? "de" : "es")) {
+        if (sel) sel.classList.remove("sel");
+        sel = b; b.classList.add("sel"); msg.textContent = ""; return;
+      }
+      const a = sel; sel = null; a.classList.remove("sel");
+      const de = a.classList.contains("de") ? a : b, sp = de === a ? b : a;
+      if (de.dataset.i === sp.dataset.i) {
+        de.classList.add("gone"); sp.classList.add("gone");
+        done.insertAdjacentHTML("beforeend", '<div class="pair"><span class="pc de">' + esc(de.textContent) + '</span><span class="pc es" lang="es">' + esc(sp.textContent) + "</span></div>");
+        speak(sp.textContent);
+        left--;
+        msg.className = "msg ok"; msg.textContent = left ? "Passt! 👍" : "Super! Alle Teile passen" + (errors ? " (" + errors + " Fehlversuch" + (errors > 1 ? "e" : "") + ")." : " – ohne Fehler! 🎉");
+        if (!left) { cde.parentNode.remove(); msg.insertAdjacentHTML("afterend", '<button class="btn" type="button" id="again">Nochmal</button>'); panel.querySelector("#again").onclick = () => puzzle(v); }
+      } else {
+        errors++;
+        [a, b].forEach(x => { x.classList.remove("shake"); void x.offsetWidth; x.classList.add("shake"); });
+        msg.className = "msg bad"; msg.textContent = "Passt nicht – probier es nochmal.";
+      }
+    });
+  }
+
+  // ---------- Karteikarten
+  function cards() {
+    let filter = "beide", deck = [], k = 0;
+    panel.innerHTML =
+      '<h2>Karteikarten</h2><div class="chips" id="fil">' +
+      ['ser', 'estar', 'beide'].map(f => '<button type="button" class="chip' + (f === filter ? " on" : "") + '" data-f="' + f + '">' + f + "</button>").join("") +
+      '</div><div class="flip" id="card"><div class="flip-in"><div class="face front"></div><div class="face back"></div></div></div>' +
+      '<p id="count" class="rule-line"></p><div class="btn-row"><button class="btn ghost" id="prev" type="button">← Zurück</button>' +
+      '<button class="btn" id="next" type="button">Weiter →</button><button class="btn ghost" id="mix" type="button">Mischen</button></div>';
+    const card = panel.querySelector("#card");
+    function build(mix) {
+      deck = [];
+      VERBS.forEach(v => { if (filter === v || filter === "beide") P.forEach(p => deck.push({ p, v })); });
+      if (mix) deck = shuffle(deck);
+      k = 0; show();
+    }
+    function show() {
+      const c = deck[k];
+      card.classList.remove("on");
+      setTimeout(() => {
+        card.querySelector(".front").innerHTML = '<div class="tag">' + c.v + '</div><div class="big">' + esc(c.p.de) + '</div><div class="hint">Tippen zum Umdrehen</div>';
+        card.querySelector(".back").innerHTML = '<div class="tag">' + c.v + '</div><div class="big" lang="es">' + esc(es(c.p, c.v)) + '</div><button class="say" type="button" aria-label="Anhören">🔊</button>';
+      }, card.classList.contains("on") ? 200 : 0);
+      panel.querySelector("#count").textContent = "Karte " + (k + 1) + " von " + deck.length;
+    }
+    card.addEventListener("click", e => {
+      if (e.target.closest(".say")) { e.stopPropagation(); speak(es(deck[k].p, deck[k].v)); return; }
+      card.classList.toggle("on");
+    });
+    panel.querySelector("#next").onclick = () => { k = (k + 1) % deck.length; show(); };
+    panel.querySelector("#prev").onclick = () => { k = (k - 1 + deck.length) % deck.length; show(); };
+    panel.querySelector("#mix").onclick = () => build(true);
+    panel.querySelector("#fil").addEventListener("click", e => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      filter = b.dataset.f; panel.querySelectorAll("#fil .chip").forEach(x => x.classList.toggle("on", x === b)); build(false);
+    });
+    build(false);
+  }
+
+  // ---------- Test
+  function test() {
+    let filter = "beide";
+    panel.innerHTML =
+      '<h2>Vokabeltest</h2><p>Schreib die spanische Form, z. B. <i lang="es">yo soy</i> oder nur <i lang="es">soy</i>. Akzente sind nicht nötig.</p>' +
+      '<div class="chips" id="fil">' + ['ser', 'estar', 'beide'].map(f => '<button type="button" class="chip' + (f === filter ? " on" : "") + '" data-f="' + f + '">' + f + "</button>").join("") + "</div>" +
+      '<table class="test"><tbody id="rows"></tbody></table>' +
+      '<div class="btn-row"><button class="btn" id="check" type="button">Auswerten</button><button class="btn ghost" id="new" type="button">Neuer Test</button></div><p class="msg" id="msg"></p>';
+    const rows = panel.querySelector("#rows"), msg = panel.querySelector("#msg");
+    let items = [];
+    function build() {
+      items = [];
+      VERBS.forEach(v => { if (filter === v || filter === "beide") shuffle(P).forEach(p => items.push({ p, v })); });
+      rows.innerHTML = items.map((it, i) =>
+        '<tr><td class="q">' + esc(it.p.de) + "<small>" + it.v + '</small></td><td><input lang="es" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="' +
+        esc(it.p.de + " (" + it.v + ")") + '" data-i="' + i + '"><div class="sol"></div></td></tr>').join("");
+      msg.textContent = ""; msg.className = "msg";
+    }
+    panel.querySelector("#check").onclick = () => {
+      let ok = 0;
+      rows.querySelectorAll("input").forEach(inp => {
+        const it = items[inp.dataset.i], r = correct(inp.value, it.p, it.v), sol = inp.nextElementSibling;
+        inp.classList.toggle("ok", r); inp.classList.toggle("bad", !r);
+        sol.className = "sol" + (r ? " ok" : "");
+        sol.textContent = r ? "richtig ✓" : "Lösung: " + es(it.p, it.v);
+        if (r) ok++;
+      });
+      msg.className = "msg " + (ok === items.length ? "ok" : "");
+      msg.textContent = ok + " von " + items.length + " richtig" + (ok === items.length ? " – super! 🎉" : ".");
+    };
+    panel.querySelector("#new").onclick = build;
+    panel.querySelector("#fil").addEventListener("click", e => {
+      const b = e.target.closest(".chip"); if (!b) return;
+      filter = b.dataset.f; panel.querySelectorAll("#fil .chip").forEach(x => x.classList.toggle("on", x === b)); build();
+    });
+    rows.addEventListener("keydown", e => {
+      if (e.key !== "Enter") return;
+      const all = [...rows.querySelectorAll("input")], n = all.indexOf(e.target) + 1;
+      if (n < all.length) all[n].focus(); else panel.querySelector("#check").click();
+    });
+    build();
+  }
+
+  const MODES = { "puzzle-ser": () => puzzle("ser"), "puzzle-estar": () => puzzle("estar"), karten: cards, test };
+  function route() {
+    let key = location.hash.slice(1); if (!MODES[key]) key = "puzzle-ser";
+    document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + key));
+    MODES[key]();
+  }
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+</body>
+</html>

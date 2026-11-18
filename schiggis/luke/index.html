@@ -6,42 +6,36 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="bingbot" content="noindex, nofollow">
-<title>Ríos de España · Luke</title>
+<title>Start · Luke</title>
 <meta name="theme-color" content="#00d2ff">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Ríos de España">
+<meta name="apple-mobile-web-app-title" content="Luke">
 <link rel="apple-touch-icon" href="assets/icon-180.png">
 <link rel="icon" type="image/png" href="assets/icon-180.png">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/luke.css">
+<script>
+  // alte Links (luke/index.html#karte usw.) zur Flüsse-Seite weiterleiten
+  if (/^#(lernen|multiple-choice|eingeben|karte)$/.test(location.hash)) location.replace("fluesse/index.html" + location.hash);
+</script>
 </head>
 <body>
 <header class="site-header">
   <div class="bar">
-    <a class="brand" href="index.html"><span class="moon">≈</span><span>Luke lernt Flüsse<small>Ríos de España</small></span></a>
+    <a class="brand" href="../index.html"><span class="moon">L</span><span>Luke lernt<small>Schiggis · Startseite</small></span></a>
   </div>
 </header>
 <main>
-  <nav class="tabs" aria-label="Modus">
-    <a href="#lernen"><span class="ico">📖&nbsp;</span>Lernen</a>
-    <a href="#multiple-choice"><span class="ico">🔘&nbsp;</span>Auswählen</a>
-    <a href="#eingeben"><span class="ico">⌨️&nbsp;</span>Eintippen</a>
-    <a href="#karte"><span class="ico">📍&nbsp;</span><span class="lg">Auf der&nbsp;</span>Karte</a>
-  </nav>
-  <div class="luke-grid">
-    <div class="map-col">
-      <div class="map" id="map">
-        <img src="assets/karte.png" alt="Karte der Iberischen Halbinsel mit den Flüssen 1 bis 11" draggable="false">
-        <span class="compass">↑ Norden</span>
-      </div>
-      <div class="map-caption" id="map-caption"></div>
-      <div class="legend"><span><i style="background:var(--teal)"></i>Atlantik</span><span><i style="background:var(--orange-2)"></i>Mittelmeer</span><span><i style="background:#b9f0ff"></i>Kantabrisches Meer</span></div>
-    </div>
-    <section id="panel" aria-live="polite"></section>
+  <section class="hero">
+    <h1>Hi Luke! 👋</h1>
+    <p>Was möchtest du heute üben?</p>
+  </section>
+  <div class="grid three">
+    <a class="card" href="fluesse/index.html"><div class="icon">🗺️</div><h3>Spaniens Flüsse</h3><p>Die 11 Flüsse auf der Karte lernen, auswählen und eintippen.</p></a>
+    <a class="card orange" href="spanisch/index.html"><div class="icon">🧩</div><h3>Spanisch: ser &amp; estar</h3><p>Puzzle, Karteikarten und Test zu yo soy, tú eres … und yo estoy, tú estás …</p></a>
+    <a class="card" href="deutsch/index.html"><div class="icon">✏️</div><h3>Deutsch</h3><p>Lernwörter anhören und ins Heft schreiben.</p></a>
   </div>
 </main>
 <footer class="site-footer">Privater Lernbereich · Ergebnisse werden nur auf diesem Gerät gespeichert</footer>
-<script src="assets/luke.js"></script>
 </body>
 </html>

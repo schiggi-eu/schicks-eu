@@ -50,10 +50,6 @@ nav.main .nl:hover,nav.main .dd.open>.nl{color:#fff}
 .dd-menu a{display:block;padding:9px 12px;border-radius:9px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}
 .dd-menu a:hover,.dd-menu a:focus-visible{background:var(--cyan-soft);color:var(--deep);outline:none}
 
-.lang{display:flex;gap:2px;margin-left:8px;padding-left:20px;border-left:1px solid rgba(255,255,255,.22)}
-.lang a{font-size:12px;font-weight:600;letter-spacing:.08em;text-decoration:none;color:#b9e3f4;padding:5px 7px;border-radius:4px}
-.lang a:hover{color:#fff}
-.lang a[aria-current=true]{color:var(--ink);background:var(--gold)}
 
 .burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;flex-direction:column;justify-content:center;gap:6px;align-items:center}
 .burger span{display:block;width:22px;height:2px;background:#fff;transition:.25s}
@@ -76,7 +72,6 @@ nav.main .nl:hover,nav.main .dd.open>.nl{color:#fff}
   .dd-head{color:var(--gold);border-color:rgba(255,255,255,.12)}
   .dd-menu a{color:#e6f7fd;padding:10px 12px}
   .dd-menu a:hover,.dd-menu a:focus-visible{background:rgba(255,255,255,.08);color:#fff}
-  .lang{margin:16px 0 0;padding:0;border:0}
 }
 
 /* ---------- Willkommen */
