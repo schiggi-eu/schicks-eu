@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Unregelmäßige Verben · Luna</title>
+<meta name="theme-color" content="#00d2ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Luna">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-root="../" data-page="verben">
+<main>
+<h1>Unregelmäßige Verben</h1>
+
+<div class="btn-row">
+  <a class="btn teal" href="#liste">📋 Liste</a>
+  <a class="btn" href="#test">✍️ Test</a>
+</div>
+
+<h2 id="liste">Liste</h2>
+<input type="search" id="verb-search" placeholder="Verb suchen …" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+<div id="verb-table"></div>
+
+<h2 id="test">Test</h2>
+<p class="lead">Die Grundform steht da – schreib simple past und past participle.</p>
+<div class="settings">
+  <label for="verb-count">Anzahl Verben</label>
+  <select id="verb-count">
+    <option value="10">10</option>
+    <option value="20" selected>20</option>
+    <option value="0">alle</option>
+  </select>
+  <div class="btn-row"><button class="btn" id="verb-start">▶ Test starten</button></div>
+</div>
+<div class="quiz" id="verb-test"></div>
+
+</main>
+<script src="../assets/data/verbs.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

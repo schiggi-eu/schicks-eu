@@ -118,11 +118,6 @@ h2{font-family:var(--serif);font-weight:700;font-size:1.9rem;line-height:1.2;col
 .note:empty{display:none}
 
 /* ---------- Sprachen */
-.many{padding-top:26px;padding-bottom:48px}
-.chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
-.chips li{padding:8px 15px;border-radius:999px;background:var(--cyan-soft);color:var(--deep);font-weight:500;font-size:15px;display:flex;align-items:baseline;gap:8px}
-.chips li:nth-child(3n+2){background:var(--orange-soft);color:var(--orange-dark)}
-.chips li small{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
 
 /* ---------- Fuß */
 .foot{background:var(--deep);color:#cdeefa;font-size:13px}

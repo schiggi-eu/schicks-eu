@@ -6,74 +6,79 @@
     de: {
       docTitle: "Schiggis · Willkommen", menu: "Menü", langGroup: "Sprache",
       brandSub: "Familienbereich",
-      lunaSub: "Englisch · Unit 1", lunaStart: "Übersicht", lunaCrash: "Crashkurs", lunaVocab: "Vokabeln",
-      lunaGrammar: "Grammatik", lunaContent: "Inhalte", lunaTests: "Tests", lunaMath: "Mathe · Terme",
+      lunaSub: "Englisch & Mathe", lunaStart: "Übersicht", lunaEn: "Englisch", lunaMa: "Mathe",
+      lunaVocab: "Vokabeln", lunaVerbs: "Unregelmäßige Verben", lunaMath1: "Mathe-Test 1", lunaMath2: "Mathe-Test 2",
       lukeSub: "Spaniens Flüsse", lukeLearn: "Lernen", lukeMc: "Auswählen", lukeType: "Eintippen", lukeMap: "Auf der Karte",
       title: "Willkommen bei den Schiggis!",
       lead: "Schön, dass du da bist! Hier üben Luna und Luke für die Schule.",
       where: "Wohin möchtest du?",
-      lunaDesc: "Englisch-Test Green Line 5, Unit 1 „The weekend workshop“: Vokabeln, Grammatik, Inhalte und Tests.",
+      lunaDesc: "Englisch: Vokabeln (Karteikarten und Schreibtest) und unregelmäßige Verben. Mathe: zwei Probetests zu Termen.",
       lukeDesc: "Test über die Flüsse Spaniens: die 11 Flüsse auf der Karte lernen, auswählen und eintippen.",
       go: "Los geht’s", note: "",
-      many: "Willkommen in vielen Sprachen",
       foot: "Privater Familienbereich · wird von Suchmaschinen nicht erfasst"
-    },
-    en: {
-      docTitle: "Schiggis · Welcome", menu: "Menu", langGroup: "Language",
-      brandSub: "Family corner",
-      lunaSub: "English · Unit 1", lunaStart: "Overview", lunaCrash: "Crash course", lunaVocab: "Vocabulary",
-      lunaGrammar: "Grammar", lunaContent: "Content", lunaTests: "Tests", lunaMath: "Maths · terms",
-      lukeSub: "Rivers of Spain", lukeLearn: "Learn", lukeMc: "Multiple choice", lukeType: "Type it", lukeMap: "On the map",
-      title: "Welcome to the Schiggis!",
-      lead: "Great to have you here! This is where Luna and Luke practise for school.",
-      where: "Where would you like to go?",
-      lunaDesc: "English test Green Line 5, Unit 1 “The weekend workshop”: vocabulary, grammar, content and tests.",
-      lukeDesc: "Test on the rivers of Spain: learn the 11 rivers on the map, pick them and type them.",
-      go: "Let’s go", note: "The learning pages themselves are in German.",
-      many: "Welcome in many languages",
-      foot: "Private family corner · not indexed by search engines"
     },
     pl: {
       docTitle: "Schiggis · Witajcie", menu: "Menu", langGroup: "Język",
       brandSub: "Strefa rodzinna",
-      lunaSub: "Angielski · Unit 1", lunaStart: "Przegląd", lunaCrash: "Szybki kurs", lunaVocab: "Słówka",
-      lunaGrammar: "Gramatyka", lunaContent: "Treści", lunaTests: "Testy", lunaMath: "Matematyka · wyrażenia",
+      lunaSub: "Angielski i matematyka", lunaStart: "Przegląd", lunaEn: "Angielski", lunaMa: "Matematyka",
+      lunaVocab: "Słówka", lunaVerbs: "Czasowniki nieregularne", lunaMath1: "Test z matematyki 1", lunaMath2: "Test z matematyki 2",
       lukeSub: "Rzeki Hiszpanii", lukeLearn: "Nauka", lukeMc: "Wybierz", lukeType: "Wpisz", lukeMap: "Na mapie",
       title: "Witajcie u Schiggisów!",
       lead: "Fajnie, że jesteś! Tutaj Luna i Luke uczą się do szkoły.",
       where: "Dokąd chcesz przejść?",
-      lunaDesc: "Sprawdzian z angielskiego Green Line 5, Unit 1 „The weekend workshop”: słówka, gramatyka, treści i testy.",
+      lunaDesc: "Angielski: słówka (fiszki i test pisemny) oraz czasowniki nieregularne. Matematyka: dwa testy próbne z wyrażeń algebraicznych.",
       lukeDesc: "Sprawdzian o rzekach Hiszpanii: naucz się 11 rzek na mapie, wybieraj je i wpisuj ich nazwy.",
       go: "Zaczynamy", note: "Same strony do nauki są po niemiecku.",
-      many: "Witamy w wielu językach",
       foot: "Prywatna strefa rodzinna · niewidoczna dla wyszukiwarek"
+    },
+    en: {
+      docTitle: "Schiggis · Welcome", menu: "Menu", langGroup: "Language",
+      brandSub: "Family corner",
+      lunaSub: "English & maths", lunaStart: "Overview", lunaEn: "English", lunaMa: "Maths",
+      lunaVocab: "Vocabulary", lunaVerbs: "Irregular verbs", lunaMath1: "Maths test 1", lunaMath2: "Maths test 2",
+      lukeSub: "Rivers of Spain", lukeLearn: "Learn", lukeMc: "Multiple choice", lukeType: "Type it", lukeMap: "On the map",
+      title: "Welcome to the Schiggis!",
+      lead: "Great to have you here! This is where Luna and Luke practise for school.",
+      where: "Where would you like to go?",
+      lunaDesc: "English: vocabulary (flashcards and writing test) and irregular verbs. Maths: two practice tests on algebraic terms.",
+      lukeDesc: "Test on the rivers of Spain: learn the 11 rivers on the map, pick them and type them.",
+      go: "Let’s go", note: "The learning pages themselves are in German.",
+      foot: "Private family corner · not indexed by search engines"
     },
     es: {
       docTitle: "Schiggis · Bienvenidos", menu: "Menú", langGroup: "Idioma",
       brandSub: "Rincón familiar",
-      lunaSub: "Inglés · Unit 1", lunaStart: "Resumen", lunaCrash: "Curso intensivo", lunaVocab: "Vocabulario",
-      lunaGrammar: "Gramática", lunaContent: "Contenidos", lunaTests: "Pruebas", lunaMath: "Mates · expresiones",
+      lunaSub: "Inglés y matemáticas", lunaStart: "Resumen", lunaEn: "Inglés", lunaMa: "Matemáticas",
+      lunaVocab: "Vocabulario", lunaVerbs: "Verbos irregulares", lunaMath1: "Examen de mates 1", lunaMath2: "Examen de mates 2",
       lukeSub: "Ríos de España", lukeLearn: "Aprender", lukeMc: "Elegir", lukeType: "Escribir", lukeMap: "En el mapa",
       title: "¡Bienvenidos al rincón de los Schiggis!",
       lead: "¡Qué bien que estés aquí! Aquí Luna y Luke practican para el colegio.",
       where: "¿Adónde quieres ir?",
-      lunaDesc: "Examen de inglés Green Line 5, Unit 1 «The weekend workshop»: vocabulario, gramática, contenidos y pruebas.",
+      lunaDesc: "Inglés: vocabulario (tarjetas y prueba escrita) y verbos irregulares. Matemáticas: dos exámenes de práctica sobre expresiones algebraicas.",
       lukeDesc: "Examen sobre los ríos de España: aprende los 11 ríos del mapa, elígelos y escribe sus nombres.",
       go: "¡Vamos!", note: "Las páginas de estudio están en alemán.",
-      many: "Bienvenidos en muchos idiomas",
       foot: "Rincón familiar privado · no aparece en los buscadores"
+    },
+    nl: {
+      docTitle: "Schiggis · Welkom", menu: "Menu", langGroup: "Taal",
+      brandSub: "Familiehoek",
+      lunaSub: "Engels & wiskunde", lunaStart: "Overzicht", lunaEn: "Engels", lunaMa: "Wiskunde",
+      lunaVocab: "Woordjes", lunaVerbs: "Onregelmatige werkwoorden", lunaMath1: "Wiskundetoets 1", lunaMath2: "Wiskundetoets 2",
+      lukeSub: "Rivieren van Spanje", lukeLearn: "Leren", lukeMc: "Kiezen", lukeType: "Intypen", lukeMap: "Op de kaart",
+      title: "Welkom bij de Schiggis!",
+      lead: "Fijn dat je er bent! Hier oefenen Luna en Luke voor school.",
+      where: "Waar wil je naartoe?",
+      lunaDesc: "Engels: woordjes (flitskaarten en schrijftoets) en onregelmatige werkwoorden. Wiskunde: twee oefentoetsen over algebraïsche termen.",
+      lukeDesc: "Toets over de rivieren van Spanje: leer de 11 rivieren op de kaart, kies ze en typ ze in.",
+      go: "Aan de slag", note: "De leerpagina’s zelf zijn in het Duits.",
+      foot: "Privé familiehoek · niet vindbaar via zoekmachines"
     }
   };
 
   // Begrüßungen: [Wort, Sprache (Eigenname), lang-Code]
   const HELLO = [
-    ["Willkommen!", "Deutsch", "de"], ["Witajcie!", "Polski", "pl"], ["¡Bienvenidos!", "Español", "es"],
-    ["Welcome!", "English", "en"], ["Bienvenue !", "Français", "fr"], ["Benvenuti!", "Italiano", "it"],
-    ["Bem-vindos!", "Português", "pt"], ["Welkom!", "Nederlands", "nl"], ["Välkommen!", "Svenska", "sv"],
-    ["Velkommen!", "Dansk", "da"], ["Tervetuloa!", "Suomi", "fi"], ["Vítejte!", "Čeština", "cs"],
-    ["Hoş geldiniz!", "Türkçe", "tr"], ["Καλώς ήρθατε!", "Ελληνικά", "el"], ["Fáilte!", "Gaeilge", "ga"],
-    ["Croeso!", "Cymraeg", "cy"], ["ようこそ！", "日本語", "ja"], ["환영합니다!", "한국어", "ko"],
-    ["欢迎！", "中文", "zh"], ["Karibu!", "Kiswahili", "sw"], ["Aloha!", "ʻŌlelo Hawaiʻi", "haw"]
+    ["Willkommen!", "Deutsch", "de"], ["Witajcie!", "Polski", "pl"], ["Welcome!", "English", "en"],
+    ["¡Bienvenidos!", "Español", "es"], ["Welkom!", "Nederlands", "nl"]
   ];
 
   const KEY = "schiggis.lang"; // eigener Schlüssel – „lang“ gehört der Hauptseite schicks.eu
@@ -137,10 +142,7 @@
     if (open) open.querySelector(".dd-btn").focus();
   });
 
-  // ---------- Willkommen in vielen Sprachen
-  const chips = document.getElementById("chips");
-  if (chips) chips.innerHTML = HELLO.map(h => `<li lang="${h[2]}">${h[0]} <small>${h[1]}</small></li>`).join("");
-
+  // ---------- Wechselnde Begrüßung
   const word = document.getElementById("hello"), name = document.getElementById("hello-lang");
   let i = 0;
   function show(k) { const h = HELLO[k]; word.textContent = h[0]; word.lang = h[2]; name.textContent = h[1]; name.lang = h[2]; }
