@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Lernwörter · Luke</title>
+<meta name="theme-color" content="#00d2ff">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .words { width: 100%; max-width: 560px; border-collapse: collapse; margin: 12px 0 24px; }
+  .words th, .words td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; font-size: 1.15rem; vertical-align: middle; }
+  .words th { font-size: .95rem; position: static; }
+  .words { min-width: 0; }
+  .words td.n { color: var(--muted); width: 2.2em; font-size: .95rem; }
+  .words td.es { font-weight: 700; }
+  .say {
+    min-width: 56px; min-height: 48px; border-radius: 12px; border: 2px solid var(--teal);
+    background: #fff; font-size: 1.4rem; cursor: pointer;
+  }
+  .say.on { background: var(--teal-soft); border-color: var(--teal-dark); }
+  #fertig { font-size: 1.15rem; padding: 0 28px; }
+  #lob { display: none; text-align: center; margin: 24px auto 0; max-width: 420px; }
+  #lob.show { display: block; animation: pop .4s ease-out; }
+  .bubble {
+    position: relative; display: inline-block; background: var(--orange-soft); border: 3px solid var(--orange);
+    border-radius: 22px; padding: 12px 26px; font-size: 1.6rem; font-weight: 800; color: var(--orange-dark); margin-bottom: 16px;
+  }
+  .bubble::after {
+    content: ""; position: absolute; left: 50%; bottom: -18px; margin-left: -14px;
+    border: 14px solid transparent; border-top: 18px solid var(--orange); border-bottom: 0;
+  }
+  #lob img { width: 100%; max-width: 340px; display: block; margin: 0 auto; }
+  @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .hint { color: var(--muted); font-size: .95rem; }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="../../index.html"><span class="moon">✎</span><span>Luke lernt Deutsch<small>Kapitel 3: Sonne, Mond und Sterne</small></span></a>
+  </div>
+</header>
+<main>
+  <h1>Lernwörter</h1>
+  <p class="lead">Tippe auf 🔊, hör gut zu und schreib das deutsche Wort in dein Heft.</p>
+  <p class="hint" id="novoice" hidden>Auf diesem Gerät gibt es keine deutsche Stimme. Bitte Mama oder Papa fragen.</p>
+
+  <table class="words">
+    <thead><tr><th></th><th>Español</th><th>Deutsch</th></tr></thead>
+    <tbody id="liste"></tbody>
+  </table>
+
+  <button class="btn" id="fertig" type="button">Ich bin fertig!</button>
+
+  <div id="lob" aria-live="polite">
+    <div class="bubble">Super gemacht!</div>
+    <img src="grogu.webp" alt="Grogu">
+  </div>
+</main>
+<footer class="site-footer">Privater Lernbereich</footer>
+<script>
+(function () {
+  "use strict";
+  const W = [
+    ["el universo", "das Weltall"],
+    ["curioso", "neugierig"],
+    ["candente", "glühend"],
+    ["el sistema solar", "das Sonnensystem"],
+    ["la Vía Láctea", "die Milchstraße"],
+    ["mirar algo", "betrachten"],
+    ["el planeta", "der Planet"],
+    ["el astronauta", "der Astronaut"],
+    ["ingrávido", "schwerelos"],
+    ["la luna", "der Mond"],
+    ["medio", "halb"],
+    ["lleno", "voll"],
+    ["la estrella", "der Stern"],
+    ["brillar", "strahlen"],
+    ["el amigo", "der Freund"],
+    ["hoy", "heute"],
+    ["despegar", "abheben"],
+    ["pilotar", "steuern"],
+    ["la cruz", "das Kreuz"],
+    ["asombrarse", "staunen"]
+  ];
+  const tb = document.getElementById("liste");
+  W.forEach(function (w, i) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = '<td class="n">' + (i + 1) + '</td><td class="es" lang="es"></td>' +
+      '<td><button class="say" type="button" aria-label="Wort ' + (i + 1) + ' anhören">🔊</button></td>';
+    tr.querySelector(".es").textContent = w[0];
+    tr.querySelector(".say").dataset.say = w[1];
+    tb.appendChild(tr);
+  });
+
+  let voice = null;
+  function pickVoice() {
+    const vs = speechSynthesis.getVoices();
+    voice = vs.find(v => v.lang === "de-DE") || vs.find(v => v.lang && v.lang.toLowerCase().startsWith("de")) || null;
+    if (vs.length) document.getElementById("novoice").hidden = !!voice;
+  }
+  const ok = "speechSynthesis" in window;
+  if (ok) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  else document.getElementById("novoice").hidden = false;
+
+  tb.addEventListener("click", function (e) {
+    const b = e.target.closest(".say");
+    if (!b || !ok) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(b.dataset.say);
+    u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = 0.8;
+    b.classList.add("on");
+    u.onend = u.onerror = function () { b.classList.remove("on"); };
+    speechSynthesis.speak(u);
+  });
+
+  document.getElementById("fertig").addEventListener("click", function () {
+    const lob = document.getElementById("lob");
+    lob.classList.remove("show"); void lob.offsetWidth; lob.classList.add("show");
+    lob.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+})();
+</script>
+</body>
+</html>
