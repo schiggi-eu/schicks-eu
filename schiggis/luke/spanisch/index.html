@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="bingbot" content="noindex, nofollow">
-<title>ser &amp; estar · Luke</title>
+<title>ser, estar, saber, tener · Luke</title>
 <meta name="theme-color" content="#00d2ff">
 <link rel="apple-touch-icon" href="../assets/icon-180.png">
 <link rel="icon" type="image/png" href="../assets/icon-180.png">
@@ -73,34 +73,36 @@
 <body>
 <header class="site-header">
   <div class="bar">
-    <a class="brand" href="../index.html"><span class="moon">ñ</span><span>Luke lernt Spanisch<small>ser &amp; estar</small></span></a>
+    <a class="brand" href="../index.html"><span class="moon">ñ</span><span>Luke lernt Spanisch<small>ser · estar · saber · tener</small></span></a>
   </div>
 </header>
 <main>
   <nav class="tabs" aria-label="Spiel">
-    <a href="#puzzle-ser">🧩 Puzzle ser</a>
-    <a href="#puzzle-estar">🧩 Puzzle estar</a>
+    <a href="#puzzle-ser" data-k="puzzle">🧩 Puzzle</a>
     <a href="#karten">🃏 Karteikarten</a>
     <a href="#test">✏️ Test</a>
   </nav>
-  <p class="rule-line"><b>ser</b> = wer oder was jemand ist (Name, Herkunft, Eigenschaft) · <b>estar</b> = wo oder wie jemand ist (Ort, Befinden)</p>
+  <p class="rule-line"><b>ser</b> = wer oder was jemand ist (Name, Herkunft, Eigenschaft) · <b>estar</b> = wo oder wie jemand ist (Ort, Befinden) · <b>saber</b> = wissen · <b>tener</b> = haben</p>
   <section id="panel" aria-live="polite"></section>
 </main>
 <footer class="site-footer">Privater Lernbereich</footer>
 <script>
 (function () {
   "use strict";
-  // Personen: Deutsch, erlaubte Pronomen, Anzeige-Pronomen, ser, estar
+  // Personen: erlaubte Pronomen, Anzeige-Pronomen, Deutsch je Verb, spanische Formen je Verb
   const P = [
-    { de: "ich bin",   pr: ["yo"],                   show: "yo",            ser: "soy",   estar: "estoy" },
-    { de: "du bist",   pr: ["tú"],                   show: "tú",            ser: "eres",  estar: "estás" },
-    { de: "er ist",    pr: ["él"],                   show: "él",            ser: "es",    estar: "está" },
-    { de: "sie ist",   pr: ["ella"],                 show: "ella",          ser: "es",    estar: "está" },
-    { de: "wir sind",  pr: ["nosotros", "nosotras"], show: "nosotros",      ser: "somos", estar: "estamos" },
-    { de: "ihr seid",  pr: ["vosotros", "vosotras"], show: "vosotros",      ser: "sois",  estar: "estáis" },
-    { de: "sie sind",  pr: ["ellos", "ellas"],       show: "ellos / ellas", ser: "son",   estar: "están" }
+    { pr: ["yo"],                   show: "yo",            de: { ser: "ich bin",  estar: "ich bin",  saber: "ich weiß",   tener: "ich habe" },  ser: "soy",   estar: "estoy",   saber: "sé",      tener: "tengo" },
+    { pr: ["tú"],                   show: "tú",            de: { ser: "du bist",  estar: "du bist",  saber: "du weißt",   tener: "du hast" },   ser: "eres",  estar: "estás",   saber: "sabes",   tener: "tienes" },
+    { pr: ["él"],                   show: "él",            de: { ser: "er ist",   estar: "er ist",   saber: "er weiß",    tener: "er hat" },    ser: "es",    estar: "está",    saber: "sabe",    tener: "tiene" },
+    { pr: ["ella"],                 show: "ella",          de: { ser: "sie ist",  estar: "sie ist",  saber: "sie weiß",   tener: "sie hat" },   ser: "es",    estar: "está",    saber: "sabe",    tener: "tiene" },
+    { pr: ["nosotros", "nosotras"], show: "nosotros",      de: { ser: "wir sind", estar: "wir sind", saber: "wir wissen", tener: "wir haben" }, ser: "somos", estar: "estamos", saber: "sabemos", tener: "tenemos" },
+    { pr: ["vosotros", "vosotras"], show: "vosotros",      de: { ser: "ihr seid", estar: "ihr seid", saber: "ihr wisst",  tener: "ihr habt" },  ser: "sois",  estar: "estáis",  saber: "sabéis",  tener: "tenéis" },
+    { pr: ["ellos", "ellas"],       show: "ellos / ellas", de: { ser: "sie sind", estar: "sie sind", saber: "sie wissen", tener: "sie haben" }, ser: "son",   estar: "están",   saber: "saben",   tener: "tienen" }
   ];
-  const VERBS = ["ser", "estar"];
+  const VERBS = ["ser", "estar", "saber", "tener"];
+  const MEAN = { ser: "sein", estar: "sein", saber: "wissen", tener: "haben" };
+  const FILTERS = VERBS.concat("alle");
+  const chips = f0 => '<div class="chips" id="fil">' + FILTERS.map(f => '<button type="button" class="chip' + (f === f0 ? " on" : "") + '" data-f="' + f + '">' + f + "</button>").join("") + "</div>";
   const panel = document.getElementById("panel");
   const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -129,11 +131,11 @@
   // ---------- Puzzle
   function puzzle(v) {
     panel.innerHTML =
-      '<h2>Puzzle: ' + v + '</h2><p>Tippe auf ein deutsches Teil und dann auf das passende spanische Teil.</p>' +
+      '<h2>Puzzle: ' + v + ' (' + MEAN[v] + ')</h2><div class="chips">' + VERBS.map(x => '<a class="chip' + (x === v ? " on" : "") + '" href="#puzzle-' + x + '" style="display:inline-flex;align-items:center;text-decoration:none">' + x + "</a>").join("") + '</div><p>Tippe auf ein deutsches Teil und dann auf das passende spanische Teil.</p>' +
       '<div class="pz"><div class="col" id="cde"></div><div class="col" id="ces"></div></div>' +
       '<p class="msg" id="msg"></p><div class="done-list" id="done"></div>';
     const cde = panel.querySelector("#cde"), ces = panel.querySelector("#ces"), msg = panel.querySelector("#msg"), done = panel.querySelector("#done");
-    shuffle(P.map((p, i) => i)).forEach(i => cde.insertAdjacentHTML("beforeend", '<button type="button" class="pc de" data-i="' + i + '">' + esc(P[i].de) + "</button>"));
+    shuffle(P.map((p, i) => i)).forEach(i => cde.insertAdjacentHTML("beforeend", '<button type="button" class="pc de" data-i="' + i + '">' + esc(P[i].de[v]) + "</button>"));
     shuffle(P.map((p, i) => i)).forEach(i => ces.insertAdjacentHTML("beforeend", '<button type="button" class="pc es" lang="es" data-i="' + i + '">' + esc(es(P[i], v)) + "</button>"));
     let sel = null, left = P.length, errors = 0;
     panel.querySelector(".pz").addEventListener("click", e => {
@@ -161,17 +163,16 @@
 
   // ---------- Karteikarten
   function cards() {
-    let filter = "beide", deck = [], k = 0;
+    let filter = "alle", deck = [], k = 0;
     panel.innerHTML =
-      '<h2>Karteikarten</h2><div class="chips" id="fil">' +
-      ['ser', 'estar', 'beide'].map(f => '<button type="button" class="chip' + (f === filter ? " on" : "") + '" data-f="' + f + '">' + f + "</button>").join("") +
-      '</div><div class="flip" id="card"><div class="flip-in"><div class="face front"></div><div class="face back"></div></div></div>' +
+      '<h2>Karteikarten</h2>' + chips(filter) +
+      '<div class="flip" id="card"><div class="flip-in"><div class="face front"></div><div class="face back"></div></div></div>' +
       '<p id="count" class="rule-line"></p><div class="btn-row"><button class="btn ghost" id="prev" type="button">← Zurück</button>' +
       '<button class="btn" id="next" type="button">Weiter →</button><button class="btn ghost" id="mix" type="button">Mischen</button></div>';
     const card = panel.querySelector("#card");
     function build(mix) {
       deck = [];
-      VERBS.forEach(v => { if (filter === v || filter === "beide") P.forEach(p => deck.push({ p, v })); });
+      VERBS.forEach(v => { if (filter === v || filter === "alle") P.forEach(p => deck.push({ p, v })); });
       if (mix) deck = shuffle(deck);
       k = 0; show();
     }
@@ -179,7 +180,7 @@
       const c = deck[k];
       card.classList.remove("on");
       setTimeout(() => {
-        card.querySelector(".front").innerHTML = '<div class="tag">' + c.v + '</div><div class="big">' + esc(c.p.de) + '</div><div class="hint">Tippen zum Umdrehen</div>';
+        card.querySelector(".front").innerHTML = '<div class="tag">' + c.v + '</div><div class="big">' + esc(c.p.de[c.v]) + '</div><div class="hint">Tippen zum Umdrehen</div>';
         card.querySelector(".back").innerHTML = '<div class="tag">' + c.v + '</div><div class="big" lang="es">' + esc(es(c.p, c.v)) + '</div><button class="say" type="button" aria-label="Anhören">🔊</button>';
       }, card.classList.contains("on") ? 200 : 0);
       panel.querySelector("#count").textContent = "Karte " + (k + 1) + " von " + deck.length;
@@ -200,20 +201,20 @@
 
   // ---------- Test
   function test() {
-    let filter = "beide";
+    let filter = "alle";
     panel.innerHTML =
       '<h2>Vokabeltest</h2><p>Schreib die spanische Form, z. B. <i lang="es">yo soy</i> oder nur <i lang="es">soy</i>. Akzente sind nicht nötig.</p>' +
-      '<div class="chips" id="fil">' + ['ser', 'estar', 'beide'].map(f => '<button type="button" class="chip' + (f === filter ? " on" : "") + '" data-f="' + f + '">' + f + "</button>").join("") + "</div>" +
+      chips(filter) +
       '<table class="test"><tbody id="rows"></tbody></table>' +
       '<div class="btn-row"><button class="btn" id="check" type="button">Auswerten</button><button class="btn ghost" id="new" type="button">Neuer Test</button></div><p class="msg" id="msg"></p>';
     const rows = panel.querySelector("#rows"), msg = panel.querySelector("#msg");
     let items = [];
     function build() {
       items = [];
-      VERBS.forEach(v => { if (filter === v || filter === "beide") shuffle(P).forEach(p => items.push({ p, v })); });
+      VERBS.forEach(v => { if (filter === v || filter === "alle") shuffle(P).forEach(p => items.push({ p, v })); });
       rows.innerHTML = items.map((it, i) =>
-        '<tr><td class="q">' + esc(it.p.de) + "<small>" + it.v + '</small></td><td><input lang="es" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="' +
-        esc(it.p.de + " (" + it.v + ")") + '" data-i="' + i + '"><div class="sol"></div></td></tr>').join("");
+        '<tr><td class="q">' + esc(it.p.de[it.v]) + "<small>" + it.v + '</small></td><td><input lang="es" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="' +
+        esc(it.p.de[it.v] + " (" + it.v + ")") + '" data-i="' + i + '"><div class="sol"></div></td></tr>').join("");
       msg.textContent = ""; msg.className = "msg";
     }
     panel.querySelector("#check").onclick = () => {
@@ -241,10 +242,11 @@
     build();
   }
 
-  const MODES = { "puzzle-ser": () => puzzle("ser"), "puzzle-estar": () => puzzle("estar"), karten: cards, test };
+  const MODES = { karten: cards, test };
+  VERBS.forEach(v => { MODES["puzzle-" + v] = () => puzzle(v); });
   function route() {
     let key = location.hash.slice(1); if (!MODES[key]) key = "puzzle-ser";
-    document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + key));
+    document.querySelectorAll(".tabs a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + key || (a.dataset.k === "puzzle" && key.startsWith("puzzle-"))));
     MODES[key]();
   }
   window.addEventListener("hashchange", route);
