@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="bingbot" content="noindex, nofollow">
+<title>Spanisch-Vokabeln · Luke</title>
+<meta name="theme-color" content="#00d2ff">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="icon" type="image/png" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 10px; }
+  .tabs a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px;
+    border: 2px solid var(--line); background: #fff; color: var(--ink); font-weight: 700; text-decoration: none; font-size: .95rem; }
+  .tabs a.on { background: var(--teal-dark); border-color: var(--teal-dark); color: #fff; }
+  .chips .chip { min-height: 44px; }
+  .pic { display: grid; place-items: center; line-height: 1; }
+  .pic { white-space: nowrap; }
+  .tile .pic.two { font-size: 38px; }
+  .face .pic.two { font-size: 60px; }
+  .pic svg { width: 100%; height: 100%; }
+  .num { font-weight: 900; color: var(--teal-dark); }
+
+  /* Karteikarten */
+  .flip { perspective: 900px; max-width: 420px; height: 300px; margin: 8px 0 12px; cursor: pointer; }
+  .flip-in { position: relative; width: 100%; height: 100%; transition: transform .45s; transform-style: preserve-3d; }
+  .flip.on .flip-in { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .face.front { background: var(--teal-soft); }
+  .face.back { background: var(--orange-soft); transform: rotateY(180deg); }
+  .face .pic { width: 130px; height: 130px; font-size: 104px; margin-bottom: 10px; }
+  .face .pic .num { font-size: 96px; }
+  .face .big { font-size: 2rem; font-weight: 800; text-align: center; padding: 0 10px; }
+  .face .tag { font-size: .8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 4px; }
+    .face .say { align-self: center; position: static; display: inline-grid; place-items: center; width: auto; height: auto; min-width: 52px; min-height: 44px; border-radius: 12px; border: 2px solid var(--orange); background: #fff; font-size: 1.2rem; margin-top: 10px; cursor: pointer; }
+  .count { color: var(--muted); margin: 0; }
+
+  /* Ins Heft */
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin: 12px 0 20px; }
+  .tile { position: relative; background: #fff; border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow);
+    padding: 12px 8px 10px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .tile .n { position: absolute; top: 6px; left: 10px; font-weight: 800; color: var(--muted); }
+  .tile .pic { width: 84px; height: 84px; font-size: 66px; margin: 6px 0 8px; }
+  .tile .pic .num { font-size: 60px; }
+  .tile .de { font-weight: 700; font-size: 1.1rem; }
+  .tile .es { display: none; margin-top: 6px; font-weight: 800; color: var(--orange-dark); font-size: 1.1rem; }
+  .solved .tile .es { display: block; }
+  #lob { display: none; text-align: center; margin: 24px auto 0; max-width: 420px; }
+  #lob.show { display: block; animation: pop .4s ease-out; }
+  .bubble { position: relative; display: inline-block; background: var(--orange-soft); border: 3px solid var(--orange);
+    border-radius: 22px; padding: 12px 26px; font-size: 1.6rem; font-weight: 800; color: var(--orange-dark); margin-bottom: 16px; }
+  .bubble::after { content: ""; position: absolute; left: 50%; bottom: -18px; margin-left: -14px;
+    border: 14px solid transparent; border-top: 18px solid var(--orange); border-bottom: 0; }
+  #lob img { width: 100%; max-width: 300px; display: block; margin: 0 auto; }
+  @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="../index.html"><span class="moon">ñ</span><span>Luke lernt Spanisch<small>Vokabeln</small></span></a>
+  </div>
+</header>
+<main>
+  <nav class="tabs" aria-label="Art">
+    <a href="#karten" data-m="karten">🃏 Karteikarten</a>
+    <a href="#heft" data-m="heft">✏️ Ins Heft</a>
+  </nav>
+  <div class="chips" id="topics"></div>
+  <section id="panel" aria-live="polite"></section>
+</main>
+<footer class="site-footer">Privater Lernbereich</footer>
+<script>
+(function () {
+  "use strict";
+  // Kleine Bilder (wo es kein passendes Emoji gibt)
+  const S = {
+    goma: '<svg viewBox="0 0 100 100"><g transform="rotate(-30 50 50)"><rect x="18" y="34" width="64" height="32" rx="6" fill="#fff" stroke="#555" stroke-width="3"/><rect x="50" y="34" width="32" height="32" rx="6" fill="#2f6fd6" stroke="#555" stroke-width="3"/><rect x="50" y="34" width="10" height="32" fill="#2f6fd6"/></g></svg>',
+    pizarra: '<svg viewBox="0 0 100 100"><rect x="8" y="18" width="84" height="58" rx="4" fill="#a0642c"/><rect x="14" y="24" width="72" height="46" fill="#2e8b57"/><path d="M24 40q10-8 20 0t20 0" stroke="#fff" stroke-width="3" fill="none"/><rect x="60" y="60" width="14" height="5" fill="#fff"/><path d="M30 76l-6 14M70 76l6 14" stroke="#a0642c" stroke-width="5"/></svg>',
+    sacapuntas: '<svg viewBox="0 0 100 100"><rect x="22" y="28" width="56" height="44" rx="8" fill="#e0338a" stroke="#8a1c55" stroke-width="3"/><circle cx="40" cy="50" r="11" fill="#5a1036"/><rect x="56" y="36" width="14" height="28" rx="2" fill="#ccc" stroke="#777" stroke-width="2"/></svg>',
+    frigorifico: '<svg viewBox="0 0 100 100"><rect x="26" y="6" width="48" height="88" rx="6" fill="#f2f6f8" stroke="#667" stroke-width="3"/><path d="M26 38h48" stroke="#667" stroke-width="3"/><rect x="32" y="16" width="4" height="14" rx="2" fill="#667"/><rect x="32" y="46" width="4" height="20" rx="2" fill="#667"/></svg>',
+    mesilla: '<svg viewBox="0 0 100 100"><path d="M40 8h20l6 18H34z" fill="#ffcc00" stroke="#a37a00" stroke-width="2"/><rect x="48" y="26" width="4" height="12" fill="#777"/><rect x="24" y="38" width="52" height="48" rx="4" fill="#c58a4a" stroke="#7a4f22" stroke-width="3"/><path d="M24 62h52" stroke="#7a4f22" stroke-width="3"/><circle cx="50" cy="50" r="3" fill="#7a4f22"/><circle cx="50" cy="74" r="3" fill="#7a4f22"/><path d="M30 86v8M70 86v8" stroke="#7a4f22" stroke-width="5"/></svg>',
+    mesa: '<svg viewBox="0 0 100 100"><rect x="8" y="34" width="84" height="10" rx="3" fill="#c58a4a" stroke="#7a4f22" stroke-width="3"/><path d="M18 44v40M82 44v40" stroke="#7a4f22" stroke-width="7"/></svg>',
+    sillon: '<svg viewBox="0 0 100 100"><rect x="24" y="18" width="52" height="46" rx="12" fill="#2f9fd6" stroke="#1d5f80" stroke-width="3"/><rect x="10" y="44" width="20" height="36" rx="8" fill="#2f9fd6" stroke="#1d5f80" stroke-width="3"/><rect x="70" y="44" width="20" height="36" rx="8" fill="#2f9fd6" stroke="#1d5f80" stroke-width="3"/><rect x="28" y="58" width="44" height="22" rx="6" fill="#7dc8ec" stroke="#1d5f80" stroke-width="3"/><path d="M18 80v8M82 80v8" stroke="#1d5f80" stroke-width="5"/></svg>',
+    garaje: '<svg viewBox="0 0 100 100"><path d="M8 44L50 14l42 30v46H8z" fill="#ffd9a0" stroke="#a34d00" stroke-width="3"/><rect x="24" y="50" width="52" height="40" fill="#ccc" stroke="#666" stroke-width="3"/><path d="M24 60h52M24 70h52M24 80h52" stroke="#888" stroke-width="2"/></svg>',
+    lavabo: '<svg viewBox="0 0 100 100"><path d="M46 14h14v10H52v10h-6z" fill="#999"/><path d="M14 40h72q0 26-36 26T14 40z" fill="#fff" stroke="#667" stroke-width="3"/><rect x="44" y="66" width="12" height="24" fill="#ddd" stroke="#667" stroke-width="3"/></svg>',
+    egg: c => '<svg viewBox="0 0 100 100"><path d="M50 8C28 8 16 44 16 62a34 32 0 0 0 68 0C84 44 72 8 50 8z" fill="' + c + '" stroke="' + (c === "#ffffff" ? "#999" : "rgba(0,0,0,.25)") + '" stroke-width="3"/><ellipse cx="38" cy="34" rx="6" ry="10" fill="#fff" opacity=".45"/></svg>'
+  };
+  // [Bild, Deutsch, Spanisch] – Bild: Emoji, SVG-Schlüssel (S.x) oder Zahl (#)
+  const T = {
+    schule: { name: "🎒 Schule", w: [
+      ["✏️", "der Bleistift", "un lápiz"],
+      ["📓", "das Heft", "un cuaderno"],
+      ["📕", "das Buch", "un libro"],
+      ["👝", "das Mäppchen", "un estuche"],
+      ["S.sacapuntas", "der Spitzer", "un sacapuntas"],
+      ["S.goma", "der Radiergummi", "una goma"],
+      ["S.pizarra", "die Tafel", "una pizarra"],
+      ["🎒", "der Schulranzen", "una mochila"],
+      ["📏", "das Lineal", "una regla"],
+      ["🖍️", "der Buntstift", "una pintura"]
+    ]},
+    zahlen: { name: "🔢 Zahlen", w: [
+      ["#0", "null", "cero"], ["#1", "eins", "uno"], ["#2", "zwei", "dos"], ["#3", "drei", "tres"], ["#4", "vier", "cuatro"],
+      ["#5", "fünf", "cinco"], ["#6", "sechs", "seis"], ["#7", "sieben", "siete"], ["#8", "acht", "ocho"], ["#9", "neun", "nueve"],
+      ["#10", "zehn", "diez"], ["#11", "elf", "once"], ["#12", "zwölf", "doce"], ["#13", "dreizehn", "trece"],
+      ["#14", "vierzehn", "catorce"], ["#15", "fünfzehn", "quince"], ["#16", "sechzehn", "dieciséis"],
+      ["#17", "siebzehn", "diecisiete"], ["#18", "achtzehn", "dieciocho"], ["#19", "neunzehn", "diecinueve"], ["#20", "zwanzig", "veinte"]
+    ]},
+    farben: { name: "🎨 Farben", w: [
+      ["C#e53935", "rot", "rojo"], ["C#7cb342", "grün", "verde"], ["C#fdd835", "gelb", "amarillo"], ["C#3f7fd8", "blau", "azul"],
+      ["C#222222", "schwarz", "negro"], ["C#ffffff", "weiß", "blanco"], ["C#a0582a", "braun", "marrón"]
+    ]},
+    casa: { name: "🏠 La casa", w: [
+      ["🏠", "das Haus", "la casa"],
+      ["🍳", "die Küche", "la cocina"],
+      ["S.frigorifico", "der Kühlschrank", "el frigorífico"],
+      ["🛌", "das Schlafzimmer", "el dormitorio"],
+      ["🛏️", "das Bett", "la cama"],
+      ["S.mesilla", "der Nachttisch", "la mesilla"],
+      ["📺", "das Wohnzimmer", "el salón"],
+      ["🛋️", "das Sofa", "el sofá"],
+      ["S.sillon", "der Sessel", "el sillón"],
+      ["S.mesa", "der Tisch", "la mesa"],
+      ["🪑🪑", "die Stühle", "las sillas"],
+      ["🛁", "das Badezimmer", "el baño"],
+      ["S.lavabo", "das Waschbecken", "el lavabo"],
+      ["🚽", "die Toilette", "el váter"],
+      ["🚿", "die Dusche", "la ducha"],
+      ["S.garaje", "die Garage", "el garaje"],
+      ["🚗", "das Auto", "el coche"],
+      ["🌳🌷", "der Garten", "el jardín"]
+    ]}
+  };
+  const KEYS = Object.keys(T);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function pic(p) {
+    let h;
+    if (p.startsWith("S.")) h = S[p.slice(2)];
+    else if (p.startsWith("C#")) h = S.egg(p.slice(1));
+    else if (p.startsWith("#")) h = '<span class="num">' + p.slice(1) + "</span>";
+    else h = esc(p);
+    const two = !/^[SC#]/.test(p) && [...p.replace(/\uFE0F/g, "")].length > 1;
+    return '<div class="pic' + (two ? " two" : "") + '" aria-hidden="true">' + h + "</div>";
+  }
+
+  let voice = null;
+  function pickVoice() { const vs = speechSynthesis.getVoices(); voice = vs.find(x => x.lang === "es-ES") || vs.find(x => x.lang && x.lang.startsWith("es")) || null; }
+  if ("speechSynthesis" in window) { pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; }
+  function speak(t) {
+    if (!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(t); u.lang = "es-ES"; if (voice) u.voice = voice; u.rate = 0.85;
+    speechSynthesis.speak(u);
+  }
+
+  const panel = document.getElementById("panel"), topics = document.getElementById("topics");
+
+  // ---------- Karteikarten: vorne Bild + Deutsch, hinten Bild + Spanisch
+  function cards(t) {
+    let deck = T[t].w.slice(), k = 0;
+    panel.innerHTML =
+      '<p class="count">Tippe auf die Karte zum Umdrehen.</p>' +
+      '<div class="flip" id="card"><div class="flip-in"><div class="face front"></div><div class="face back"></div></div></div>' +
+      '<p class="count" id="count"></p><div class="btn-row"><button class="btn ghost" id="prev" type="button">← Zurück</button>' +
+      '<button class="btn" id="next" type="button">Weiter →</button><button class="btn ghost" id="mix" type="button">Mischen</button></div>';
+    const card = panel.querySelector("#card");
+    function show() {
+      const c = deck[k], wasOn = card.classList.contains("on");
+      card.classList.remove("on");
+      setTimeout(() => {
+        card.querySelector(".front").innerHTML = pic(c[0]) + '<div class="tag">Deutsch</div><div class="big">' + esc(c[1]) + "</div>";
+        card.querySelector(".back").innerHTML = pic(c[0]) + '<div class="tag">Español</div><div class="big" lang="es">' + esc(c[2]) + '</div><button class="say" type="button" aria-label="Anhören">🔊</button>';
+      }, wasOn ? 220 : 0);
+      panel.querySelector("#count").textContent = "Karte " + (k + 1) + " von " + deck.length;
+    }
+    card.addEventListener("click", e => {
+      if (e.target.closest(".say")) { e.stopPropagation(); speak(deck[k][2]); return; }
+      card.classList.toggle("on");
+    });
+    panel.querySelector("#next").onclick = () => { k = (k + 1) % deck.length; show(); };
+    panel.querySelector("#prev").onclick = () => { k = (k - 1 + deck.length) % deck.length; show(); };
+    panel.querySelector("#mix").onclick = () => { deck = shuffle(deck); k = 0; show(); };
+    show();
+  }
+
+  // ---------- Ins Heft: Bild + Deutsch, Spanisch mit Stift ins Heft
+  function heft(t) {
+    const list = shuffle(T[t].w);
+    panel.innerHTML =
+      '<p>Schreib die Nummer und das spanische Wort in dein Heft. Danach tippst du auf „Ich bin fertig!“ und kontrollierst.</p>' +
+      '<div class="tiles" id="tiles">' + list.map((c, i) =>
+        '<div class="tile"><span class="n">' + (i + 1) + "</span>" + pic(c[0]) + '<div class="de">' + esc(c[1]) + '</div><div class="es" lang="es">' + esc(c[2]) + "</div></div>").join("") + "</div>" +
+      '<div class="btn-row"><button class="btn" id="fertig" type="button">Ich bin fertig!</button><button class="btn ghost" id="neu" type="button">Neu mischen</button></div>' +
+      '<div id="lob"><div class="bubble">Super gemacht!</div><img src="../deutsch/grogu.webp" alt="Grogu"></div>';
+    panel.querySelector("#fertig").onclick = () => {
+      panel.querySelector("#tiles").classList.add("solved");
+      const lob = panel.querySelector("#lob");
+      lob.classList.remove("show"); void lob.offsetWidth; lob.classList.add("show");
+    };
+    panel.querySelector("#neu").onclick = () => { heft(t); window.scrollTo(0, 0); };
+  }
+
+  function route() {
+    const m = location.hash.slice(1).split("-");
+    const mode = m[0] === "heft" ? "heft" : "karten", t = T[m[1]] ? m[1] : "schule";
+    document.querySelectorAll(".tabs a").forEach(a => { a.classList.toggle("on", a.dataset.m === mode); a.href = "#" + a.dataset.m + "-" + t; });
+    topics.innerHTML = KEYS.map(k => '<a class="chip' + (k === t ? " on" : "") + '" href="#' + mode + "-" + k + '" style="display:inline-flex;align-items:center;text-decoration:none">' + T[k].name + "</a>").join("");
+    (mode === "heft" ? heft : cards)(t);
+  }
+  window.addEventListener("hashchange", route);
+  route();
+})();
+</script>
+</body>
+</html>
